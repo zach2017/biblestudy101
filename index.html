@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Exploring Your Textbook | 20th Century Bible Course</title>
+<script src="tailwinds.js"></script>  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dark: #a07d2e;
+      --parchment: #faf6ed;
+      --ink: #2c1810;
+      --ink-light: #5a4030;
+      --cream: #f5f0e3;
+      --burgundy: #6b1d2a;
+      --burgundy-light: #8b3040;
+      --forest: #2d4a3e;
+    }
+
+    [data-theme="dark"] {
+      --parchment: #1a1510;
+      --ink: #e8dcc8;
+      --ink-light: #c4b8a4;
+      --cream: #231e16;
+      --burgundy: #d4607a;
+      --burgundy-light: #e08898;
+      --forest: #6bc4a0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--parchment);
+      color: var(--ink);
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-body { font-family: 'Lora', Georgia, serif; }
+    .font-ui { font-family: 'Source Sans Pro', -apple-system, sans-serif; }
+
+    /* Ornamental divider */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .ornament::before, .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .ornament-icon {
+      color: var(--gold);
+      font-size: 1.25rem;
+    }
+
+    /* Scripture card styling */
+    .verse-card {
+      position: relative;
+      border-left: 3px solid var(--gold);
+      transition: all 0.3s ease;
+    }
+    .verse-card:hover {
+      border-left-color: var(--burgundy);
+      transform: translateX(4px);
+    }
+
+    /* Tab styling */
+    .tab-btn {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .tab-btn.active::after { width: 80%; }
+    .tab-btn.active { color: var(--gold-dark); }
+    [data-theme="dark"] .tab-btn.active { color: var(--gold-light); }
+
+    /* Section navigation */
+    .section-nav-item {
+      transition: all 0.3s ease;
+      border-left: 2px solid transparent;
+    }
+    .section-nav-item:hover,
+    .section-nav-item.active {
+      border-left-color: var(--gold);
+      padding-left: 1rem;
+    }
+
+    /* Glow effect for dark mode */
+    [data-theme="dark"] .glow-gold {
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+    }
+    .accordion-content.open {
+      max-height: 2000px;
+    }
+
+    /* Background texture */
+    .bg-texture {
+      background-image: 
+        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.03) 0%, transparent 50%);
+    }
+    [data-theme="dark"] .bg-texture {
+      background-image: 
+        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.05) 0%, transparent 50%);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+    /* Drop cap */
+    .drop-cap::first-letter {
+      float: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      padding-top: 0.1rem;
+      color: var(--burgundy);
+      font-weight: 600;
+    }
+
+    /* Commentary box */
+    .commentary-box {
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.02));
+      border: 1px solid rgba(201, 168, 76, 0.2);
+    }
+    [data-theme="dark"] .commentary-box {
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.04));
+      border: 1px solid rgba(201, 168, 76, 0.25);
+    }
+
+    /* Cross reference badge */
+    .cross-ref {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background: rgba(201, 168, 76, 0.15);
+      color: var(--gold-dark);
+      transition: all 0.2s ease;
+      text-decoration: none;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+    .cross-ref:hover {
+      background: rgba(201, 168, 76, 0.3);
+      transform: translateY(-1px);
+    }
+    [data-theme="dark"] .cross-ref {
+      color: var(--gold-light);
+      background: rgba(201, 168, 76, 0.2);
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--burgundy));
+      z-index: 100;
+      transition: width 0.1s linear;
+    }
+
+    /* Floating theme toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 50;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold);
+      background: var(--cream);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(201, 168, 76, 0.3);
+    }
+
+    /* Hero section */
+    .hero-bg {
+      background: linear-gradient(160deg, #2c1810 0%, #1a0f0a 40%, #0d0806 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.1) 0%, transparent 60%);
+      animation: pulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Link styles */
+    a.verse-link {
+      color: var(--burgundy);
+      text-decoration: underline;
+      text-decoration-color: rgba(107, 29, 42, 0.3);
+      text-underline-offset: 2px;
+      transition: all 0.2s;
+    }
+    a.verse-link:hover {
+      text-decoration-color: var(--burgundy);
+    }
+    [data-theme="dark"] a.verse-link {
+      color: var(--burgundy-light);
+    }
+
+    /* Print styles */
+    @media print {
+      .theme-toggle, .progress-bar, .section-nav { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-texture" data-theme="light">
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+    <span id="themeIcon" style="font-size: 1.4rem;">🌙</span>
+  </button>
+
+  <!-- Hero Section -->
+  <header class="hero-bg text-white py-20 md:py-32 px-6 text-center relative">
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <p class="font-ui text-xs tracking-widest uppercase mb-4" style="color: var(--gold-light); letter-spacing: 0.3em;">20th Century Bible Course</p>
+      <h1 class="font-display text-5xl md:text-7xl font-light mb-3 leading-tight" style="color: var(--gold-light);">
+        Lesson 1
+      </h1>
+      <div class="w-24 h-px mx-auto my-6" style="background: var(--gold);"></div>
+      <h2 class="font-display text-2xl md:text-3xl font-light italic mb-6" style="color: #e8dcc8;">
+        Exploring Your Textbook
+      </h2>
+      <p class="font-body text-sm md:text-base leading-relaxed max-w-xl mx-auto" style="color: #c4b8a4;">
+        Scripture Reading: Psalm 119:9–16
+      </p>
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <a href="#part1" class="font-ui text-sm px-5 py-2 rounded-full border transition-all hover:bg-white hover:bg-opacity-10" style="border-color: var(--gold); color: var(--gold-light);">Begin Study ↓</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Welcome Letter -->
+  <section class="max-w-3xl mx-auto px-6 py-16 fade-in">
+    <div class="text-center mb-10">
+      <span class="font-display text-lg italic" style="color: var(--gold-dark);">Dear Friend,</span>
+    </div>
+    <div class="drop-cap leading-relaxed text-base md:text-lg" style="color: var(--ink-light);">
+      <p class="mb-4">Welcome to the growing number of people who want to learn more about the Bible. One of the best ways to judge the quality of a product is to examine the item itself. So today we plan to examine the Bible more closely and see if it is a reliable book.</p>
+      <p class="mb-4">John Wesley once said: <em>"The Bible must be the invention either of good men or angels, bad men or devils, or of God."</em> Good men would not claim divine authorship for their own words. Bad men would not write a book condemning their own sin. Therefore, the Bible must be given by divine inspiration.</p>
+      <p>If we approach the Bible with prayer and an open heart, we will hear God speaking through its pages — encouraging us to a life of love, maturity, and beauty, like that of the Lord Jesus Christ, who is the Living Word and the heart of it all.</p>
+    </div>
+    <p class="text-right mt-8 italic font-display" style="color: var(--gold-dark);">— Your Bible Instructor</p>
+  </section>
+
+  <div class="ornament max-w-3xl mx-auto px-6"><span class="ornament-icon">✦</span></div>
+
+  <!-- Table of Contents -->
+  <nav class="max-w-3xl mx-auto px-6 mb-16 fade-in">
+    <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">Lesson Outline</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <a href="#part1" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 1</span>
+        <p class="font-display text-lg mt-1">What the Scriptures Are</p>
+      </a>
+      <a href="#part2" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 2</span>
+        <p class="font-display text-lg mt-1">How the Scriptures Were Given</p>
+      </a>
+      <a href="#part3" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 3</span>
+        <p class="font-display text-lg mt-1">Why the Scriptures Were Given</p>
+      </a>
+      <a href="#part4" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 4</span>
+        <p class="font-display text-lg mt-1">How We Can Sift Truth from Error</p>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Translation Toggle (Global) -->
+  <div class="max-w-3xl mx-auto px-6 mb-8 text-center fade-in">
+    <div class="inline-flex rounded-full p-1 font-ui text-sm" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.3);">
+      <button onclick="setGlobalTranslation('kjv')" id="globalKjv" class="tab-btn active px-5 py-2 rounded-full transition-all" style="font-weight: 600;">KJV</button>
+      <button onclick="setGlobalTranslation('nlt')" id="globalNlt" class="tab-btn px-5 py-2 rounded-full transition-all" style="font-weight: 600;">NLT</button>
+      <button onclick="setGlobalTranslation('both')" id="globalBoth" class="tab-btn px-5 py-2 rounded-full transition-all" style="font-weight: 600;">Both</button>
+    </div>
+    <p class="font-ui text-xs mt-2" style="color: var(--ink-light);">Toggle translations for all verses</p>
+  </div>
+
+  <!-- ═══════════════════════════════════ PART 1 ═══════════════════════════════════ -->
+  <section id="part1" class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 1</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">What the Scriptures Are</h2>
+      <div class="w-16 h-0.5 rounded" style="background: var(--gold);"></div>
+    </div>
+
+    <!-- Question 1.1 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">1. What three basic divisions comprised the Scriptures in Christ's day?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Luke 24:44–45</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"And he said unto them, These are the words which I spake unto you, while I was yet with you, that all things must be fulfilled, which were written in the law of Moses, and in the prophets, and in the psalms, concerning me. Then opened he their understanding, that they might understand the scriptures."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Then he said, 'When I was with you before, I told you that everything written about me in the law of Moses and the prophets and in the Psalms must be fulfilled.' Then he opened their minds to understand the Scriptures."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed mb-4">The 39 books of the Old Testament were written before the birth of Christ, and the 27 books of the New Testament were written after His birth. These two testaments make up our Bible, and although written over a 1,600-year period by a variety of writers, it shows unusual unity and harmony.</p>
+
+      <div class="commentary-box rounded-lg p-5 mb-4">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">📖 Commentary</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">The three-part division Jesus mentions — the Law of Moses, the Prophets, and the Psalms — reflects how the Hebrew Scriptures were organized in the first century. This structure, known as the <em>Tanakh</em> (Torah, Nevi'im, Ketuvim), was the accepted canon of Jesus' day. By referencing all three divisions, Jesus affirmed the entirety of the Old Testament as pointing toward Himself.</p>
+        <p class="text-xs mt-3 font-ui" style="color: var(--ink-light);">— Adapted from Luther Seminary's <em>Working Preacher</em> commentary</p>
+      </div>
+
+      <blockquote class="border-l-2 pl-4 my-4 italic text-sm" style="border-color: var(--gold); color: var(--ink-light);">
+        "The Old Testament is the New Testament concealed; the New Testament is the Old Testament revealed."
+      </blockquote>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=Nehemiah+8%3A1-8&version=KJV;NLT" target="_blank" class="cross-ref">Nehemiah 8:1–8</a>
+        <a href="https://www.biblegateway.com/passage/?search=Matthew+5%3A17&version=KJV;NLT" target="_blank" class="cross-ref">Matthew 5:17</a>
+        <a href="https://www.biblegateway.com/passage/?search=Romans+3%3A21&version=KJV;NLT" target="_blank" class="cross-ref">Romans 3:21</a>
+      </div>
+    </div>
+
+    <!-- Question 1.2 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">2. What part of the New Testament was already recognized as Scripture in Peter's day?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Peter 3:15–16</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"And account that the longsuffering of our Lord is salvation; even as our beloved brother Paul also according to the wisdom given unto him hath written unto you; As also in all his epistles, speaking in them of these things; in which are some things hard to be understood, which they that are unlearned and unstable wrest, as they do also the other scriptures, unto their own destruction."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"And remember, our Lord's patience gives people time to be saved. This is what our beloved brother Paul also wrote to you with the wisdom God gave him — speaking of these things in all of his letters. Some of his comments are hard to understand, and those who are ignorant and unstable have twisted his letters to mean something quite different, just as they do with other parts of Scripture. And this will result in their destruction."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">Peter recognized Paul's epistles (letters) as Scripture, placing them alongside the Old Testament writings. This is significant because it shows that even during the apostolic age, the early church recognized inspired New Testament writings as authoritative.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=1+Thessalonians+2%3A13&version=KJV;NLT" target="_blank" class="cross-ref">1 Thessalonians 2:13</a>
+        <a href="https://www.biblegateway.com/passage/?search=1+Timothy+5%3A18&version=KJV;NLT" target="_blank" class="cross-ref">1 Timothy 5:18</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament max-w-3xl mx-auto px-6"><span class="ornament-icon">✦</span></div>
+
+  <!-- ═══════════════════════════════════ PART 2 ═══════════════════════════════════ -->
+  <section id="part2" class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 2</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">How the Scriptures Were Given</h2>
+      <div class="w-16 h-0.5 rounded" style="background: var(--gold);"></div>
+    </div>
+
+    <!-- Question 2.1 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">1. Although men did the writing, who was responsible for the inspiration and content of the Scriptures?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Timothy 3:16</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"All Scripture is inspired by God and is useful to teach us what is true and to make us realize what is wrong in our lives. It corrects us when we are wrong and teaches us to do what is right."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed"><strong>God Himself</strong> was responsible. The phrase "given by inspiration of God" (Greek: <em>theopneustos</em>) literally means "God-breathed." While human authors wrote the words, the ultimate source of the content was divine.</p>
+
+      <div class="commentary-box rounded-lg p-5 mb-4">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">📖 Commentary</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">The term <em>theopneustos</em> emphasizes that Scripture originates from God, much like breath comes from the one breathing. This does not mean the human authors were mere dictation machines — God worked through their personalities, backgrounds, and writing styles — but the result is a text that carries divine authority and trustworthiness.</p>
+        <p class="text-xs mt-3 font-ui" style="color: var(--ink-light);">— Adapted from BibleRef.com commentary on 2 Timothy 3:16</p>
+      </div>
+    </div>
+
+    <!-- Question 2.2 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">2. How much of the Bible is inspired?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Timothy 3:16</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"<strong>All</strong> scripture is given by inspiration of God…"</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"<strong>All</strong> Scripture is inspired by God…"</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">Not just some, but <strong>all</strong>! What an assurance! Every part of Scripture — history, poetry, prophecy, law, and gospel — carries the stamp of divine inspiration.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=Psalm+12%3A6&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 12:6</a>
+        <a href="https://www.biblegateway.com/passage/?search=Proverbs+30%3A5&version=KJV;NLT" target="_blank" class="cross-ref">Proverbs 30:5</a>
+        <a href="https://www.biblegateway.com/passage/?search=Matthew+4%3A4&version=KJV;NLT" target="_blank" class="cross-ref">Matthew 4:4</a>
+      </div>
+    </div>
+
+    <!-- Question 2.3 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">3. Through whom did God convey His messages to chosen men of God?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Peter 1:21</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"For the prophecy came not in old time by the will of man: but holy men of God spake as they were moved by the Holy Ghost."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"For no prophecy was ever produced by the will of man, but men spoke from God as they were carried along by the Holy Spirit."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed mb-4">The <strong>Holy Spirit</strong> was the divine agent who moved upon the hearts and minds of the Bible writers. David expressed this same truth: <em>"The Spirit of the Lord spake by me, and his word was in my tongue"</em> (2 Samuel 23:2).</p>
+
+      <div class="commentary-box rounded-lg p-5 mb-4">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">📖 Commentary</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">Matthew Henry's commentary notes that the Holy Spirit so assisted and directed the Bible writers in delivering what they had received from Him that they clearly expressed what they made known. The Scriptures are to be accounted the words of the Holy Spirit — all the plainness and simplicity, all the power and propriety of the words and expressions, come from God.</p>
+        <p class="text-xs mt-3 font-ui" style="color: var(--ink-light);">— Adapted from Matthew Henry's Commentary</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=2+Samuel+23%3A2&version=KJV;NLT" target="_blank" class="cross-ref">2 Samuel 23:2</a>
+        <a href="https://www.biblegateway.com/passage/?search=1+Peter+1%3A10-12&version=KJV;NLT" target="_blank" class="cross-ref">1 Peter 1:10–12</a>
+        <a href="https://www.biblegateway.com/passage/?search=Hebrews+1%3A1-2&version=KJV;NLT" target="_blank" class="cross-ref">Hebrews 1:1–2</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament max-w-3xl mx-auto px-6"><span class="ornament-icon">✦</span></div>
+
+  <!-- ═══════════════════════════════════ PART 3 ═══════════════════════════════════ -->
+  <section id="part3" class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 3</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">Why the Scriptures Were Given</h2>
+      <div class="w-16 h-0.5 rounded" style="background: var(--gold);"></div>
+    </div>
+
+    <!-- Question 3.1 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">1. What four reasons does Paul give for studying the Bible?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Timothy 3:16</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"All scripture is given by inspiration of God, and is profitable for <strong>doctrine</strong>, for <strong>reproof</strong>, for <strong>correction</strong>, for <strong>instruction in righteousness</strong>."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"All Scripture is inspired by God and is useful to <strong>teach us what is true</strong> and to <strong>make us realize what is wrong</strong> in our lives. It <strong>corrects us</strong> when we are wrong and <strong>teaches us to do what is right</strong>."</p>
+        </div>
+      </div>
+
+      <!-- Four Purposes Accordion -->
+      <div class="space-y-3 mt-6">
+        <div class="rounded-lg overflow-hidden" style="background: var(--cream);">
+          <button onclick="toggleAccordion(this)" class="w-full text-left p-4 flex items-center justify-between font-ui font-semibold" style="color: var(--burgundy);">
+            <span>📜 Doctrine — Teaching & Guidance</span>
+            <span class="accordion-arrow transition-transform">▾</span>
+          </button>
+          <div class="accordion-content px-4 pb-4">
+            <p class="text-sm leading-relaxed" style="color: var(--ink-light);">"Doctrine" means "teaching," "guide," or "rule." The Scriptures provide the foundational truths by which we understand God, ourselves, and our purpose in the world. They are the believer's roadmap for faith and life.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <a href="https://www.biblegateway.com/passage/?search=Psalm+19%3A7-11&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 19:7–11</a>
+              <a href="https://www.biblegateway.com/passage/?search=Psalm+119%3A105&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 119:105</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden" style="background: var(--cream);">
+          <button onclick="toggleAccordion(this)" class="w-full text-left p-4 flex items-center justify-between font-ui font-semibold" style="color: var(--burgundy);">
+            <span>🔍 Reproof — Revealing Our Need</span>
+            <span class="accordion-arrow transition-transform">▾</span>
+          </button>
+          <div class="accordion-content px-4 pb-4">
+            <p class="text-sm leading-relaxed" style="color: var(--ink-light);">The Scriptures will often tell us, "Thou art the man" (2 Samuel 12:7). Like a mirror, God's Word shows us who we really are — our sins, our shortcomings, and our need for grace.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <a href="https://www.biblegateway.com/passage/?search=2+Samuel+12%3A1-7&version=KJV;NLT" target="_blank" class="cross-ref">2 Samuel 12:1–7</a>
+              <a href="https://www.biblegateway.com/passage/?search=James+1%3A23-25&version=KJV;NLT" target="_blank" class="cross-ref">James 1:23–25</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden" style="background: var(--cream);">
+          <button onclick="toggleAccordion(this)" class="w-full text-left p-4 flex items-center justify-between font-ui font-semibold" style="color: var(--burgundy);">
+            <span>🔧 Correction — Setting Us Right</span>
+            <span class="accordion-arrow transition-transform">▾</span>
+          </button>
+          <div class="accordion-content px-4 pb-4">
+            <p class="text-sm leading-relaxed mb-3" style="color: var(--ink-light);">Thank God, the Scriptures not only reprove but tell us the correct way and lead us to the power that is able to keep us from sinning. As Hebrews 4:12 declares, the word of God is living and powerful. The Psalmist wrote: "Thy word have I hid in mine heart, that I might not sin against thee" (Psalm 119:11).</p>
+            <p class="text-sm leading-relaxed" style="color: var(--ink-light);">Jesus Himself knew the Scriptures and used them to withstand the temptations of Satan (Matthew 4:4, 7, 10) — demonstrating that God's Word is our greatest weapon against temptation.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <a href="https://www.biblegateway.com/passage/?search=Hebrews+4%3A12&version=KJV;NLT" target="_blank" class="cross-ref">Hebrews 4:12</a>
+              <a href="https://www.biblegateway.com/passage/?search=Psalm+119%3A11&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 119:11</a>
+              <a href="https://www.biblegateway.com/passage/?search=Matthew+4%3A1-11&version=KJV;NLT" target="_blank" class="cross-ref">Matthew 4:1–11</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden" style="background: var(--cream);">
+          <button onclick="toggleAccordion(this)" class="w-full text-left p-4 flex items-center justify-between font-ui font-semibold" style="color: var(--burgundy);">
+            <span>🎓 Instruction — Training in Righteousness</span>
+            <span class="accordion-arrow transition-transform">▾</span>
+          </button>
+          <div class="accordion-content px-4 pb-4">
+            <p class="text-sm leading-relaxed" style="color: var(--ink-light);">One verse of Scripture is worth a whole book of man's words. "The entrance of thy words giveth light; it giveth understanding unto the simple" (Psalm 119:130). "What is the chaff to the wheat? saith the Lord" (Jeremiah 23:28). Why take less when we may choose the wheat?</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <a href="https://www.biblegateway.com/passage/?search=Psalm+119%3A130&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 119:130</a>
+              <a href="https://www.biblegateway.com/passage/?search=Jeremiah+23%3A28&version=KJV;NLT" target="_blank" class="cross-ref">Jeremiah 23:28</a>
+              <a href="https://www.biblegateway.com/passage/?search=2+Timothy+3%3A17&version=KJV;NLT" target="_blank" class="cross-ref">2 Timothy 3:17</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question 3.2 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">2. What other benefits come from studying the Bible?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Romans 15:4</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"For whatsoever things were written aforetime were written for our learning, that we through patience and comfort of the scriptures might have hope."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Such things were written in the Scriptures long ago to teach us. And the Scriptures give us hope and encouragement as we wait patiently for God's promises to be fulfilled."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">The Bible gives us <strong>patience</strong>, <strong>comfort</strong>, and <strong>hope</strong>. In every trial, the Scriptures remind us that God is faithful and His promises are sure.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=Romans+5%3A3-5&version=KJV;NLT" target="_blank" class="cross-ref">Romans 5:3–5</a>
+        <a href="https://www.biblegateway.com/passage/?search=Psalm+119%3A49-50&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 119:49–50</a>
+      </div>
+    </div>
+
+    <!-- Question 3.3 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">3. What is the real goal of all Bible study?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 5:39</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"You search the Scriptures because you think they give you eternal life. But the Scriptures point to me!"</p>
+        </div>
+      </div>
+
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 17:3</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"And this is life eternal, that they might know thee the only true God, and Jesus Christ, whom thou hast sent."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"And this is the way to have eternal life — to know you, the only true God, and Jesus Christ, the one you sent to earth."</p>
+        </div>
+      </div>
+
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">2 Peter 1:19</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"We have also a more sure word of prophecy; whereunto ye do well that ye take heed, as unto a light that shineth in a dark place, until the day dawn, and the day star arise in your hearts."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Because of that experience, we have even greater confidence in the message proclaimed by the prophets. You must pay close attention to what they wrote, for their words are like a lamp shining in a dark place — until the Day dawns, and Christ the Morning Star shines in your hearts."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">The supreme goal of Bible study is to <strong>know Jesus Christ</strong> — the Day Star, the Morning Star, the Source of eternal life. Through the Scriptures we get to know the most important Person in all the world.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=John+14%3A7&version=KJV;NLT" target="_blank" class="cross-ref">John 14:7</a>
+        <a href="https://www.biblegateway.com/passage/?search=Philippians+3%3A8-10&version=KJV;NLT" target="_blank" class="cross-ref">Philippians 3:8–10</a>
+        <a href="https://www.biblegateway.com/passage/?search=Colossians+1%3A15-20&version=KJV;NLT" target="_blank" class="cross-ref">Colossians 1:15–20</a>
+      </div>
+    </div>
+
+    <!-- Question 3.4 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">4. Where is the source of truth?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 17:17</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"Sanctify them through thy truth: thy word is truth."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Make them holy by your truth; teach them your word, which is truth."</p>
+        </div>
+      </div>
+
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 14:6</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Jesus told him, 'I am the way, the truth, and the life. No one can come to the Father except through me.'"</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed mb-4">Jesus is truth, and His Word is truth. There is no contradiction between them. As John 1:14 declares, <em>"The Word was made flesh, and dwelt among us."</em> If we want to know what God is like, we can look at Jesus. And we find the life of Jesus revealed in the Word of God.</p>
+    </div>
+
+    <!-- Question 3.5 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">5. By what name did John the Revelator call Christ when describing the second coming?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Revelation 19:13</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"And he was clothed with a vesture dipped in blood: and his name is called The Word of God."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"He wore a robe dipped in blood, and his title was the Word of God."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">Jesus is called <strong>"The Word of God"</strong> — uniting the written Word and the Living Word as one. No wonder John called Jesus the Word!</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=John+1%3A1-14&version=KJV;NLT" target="_blank" class="cross-ref">John 1:1–14</a>
+        <a href="https://www.biblegateway.com/passage/?search=Revelation+19%3A11-16&version=KJV;NLT" target="_blank" class="cross-ref">Revelation 19:11–16</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament max-w-3xl mx-auto px-6"><span class="ornament-icon">✦</span></div>
+
+  <!-- ═══════════════════════════════════ PART 4 ═══════════════════════════════════ -->
+  <section id="part4" class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 4</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">How We Can Sift Truth from Error</h2>
+      <div class="w-16 h-0.5 rounded" style="background: var(--gold);"></div>
+    </div>
+
+    <!-- Question 4.1 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">1. What did the Bereans do to check whether Paul was teaching them truth?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Acts 17:11</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"These were more noble than those in Thessalonica, in that they received the word with all readiness of mind, and searched the scriptures daily, whether those things were so."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"And the people of Berea were more open-minded than those in Thessalonica, and they listened eagerly to Paul's message. They searched the Scriptures day after day to see if Paul and Silas were teaching the truth."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed mb-4">The Bereans provide a model for every believer: <strong>receive teaching eagerly, but test everything against Scripture</strong>. They did not reject Paul's teaching out of hand, nor did they accept it blindly. They searched the Scriptures daily to verify what they heard.</p>
+
+      <div class="commentary-box rounded-lg p-5 mb-4">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">📖 Commentary</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">BibleRef.com notes that the Bereans exemplify informed, reasonable faith. They used cautious but sincere skepticism — hearing a claim and making an honest effort to see whether it was true. They looked to Scripture rather than blind faith or hard cynicism to determine the best response. This is a pattern Scripture itself endorses for all believers (see also 1 John 4:1).</p>
+        <p class="text-xs mt-3 font-ui" style="color: var(--ink-light);">— Adapted from BibleRef.com commentary on Acts 17:11</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=1+John+4%3A1&version=KJV;NLT" target="_blank" class="cross-ref">1 John 4:1</a>
+        <a href="https://www.biblegateway.com/passage/?search=Romans+10%3A14-15&version=KJV;NLT" target="_blank" class="cross-ref">Romans 10:14–15</a>
+        <a href="https://www.biblegateway.com/passage/?search=Isaiah+8%3A20&version=KJV;NLT" target="_blank" class="cross-ref">Isaiah 8:20</a>
+        <a href="https://www.biblegateway.com/passage/?search=2+Corinthians+13%3A5&version=KJV;NLT" target="_blank" class="cross-ref">2 Corinthians 13:5</a>
+      </div>
+    </div>
+
+    <!-- Question 4.2 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">2. What attitude should we have when studying the Scriptures?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 7:17</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"If any man will do his will, he shall know of the doctrine, whether it be of God, or whether I speak of myself."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Anyone who wants to do the will of God will know whether my teaching is from God or is merely my own."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">If we are <strong>willing to obey</strong>, Jesus promises we will recognize truth. We may not know all of His will right now, but if our hearts are surrendered to follow wherever He leads, He assures us He will direct us into all truth.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=Psalm+25%3A4-5&version=KJV;NLT" target="_blank" class="cross-ref">Psalm 25:4–5</a>
+        <a href="https://www.biblegateway.com/passage/?search=James+1%3A5-6&version=KJV;NLT" target="_blank" class="cross-ref">James 1:5–6</a>
+        <a href="https://www.biblegateway.com/passage/?search=Proverbs+2%3A1-6&version=KJV;NLT" target="_blank" class="cross-ref">Proverbs 2:1–6</a>
+      </div>
+    </div>
+
+    <!-- Question 4.3 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">3. What is promised those who follow what they learn from God's Word?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Luke 11:28</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"But he said, Yea rather, blessed are they that hear the word of God, and keep it."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"Jesus replied, 'But even more blessed are all who hear the word of God and put it into practice.'"</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed"><strong>Blessing</strong> — a special divine blessing — is promised to those who both hear and obey. Jesus pronounced this blessing Himself, making it one of the most personal promises in all of Scripture.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=James+1%3A22-25&version=KJV;NLT" target="_blank" class="cross-ref">James 1:22–25</a>
+        <a href="https://www.biblegateway.com/passage/?search=Revelation+1%3A3&version=KJV;NLT" target="_blank" class="cross-ref">Revelation 1:3</a>
+        <a href="https://www.biblegateway.com/passage/?search=Joshua+1%3A8&version=KJV;NLT" target="_blank" class="cross-ref">Joshua 1:8</a>
+      </div>
+    </div>
+
+    <!-- Question 4.4 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">4. How will the Holy Spirit help us as we study God's Word?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">John 14:26</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"But the Comforter, which is the Holy Ghost, whom the Father will send in my name, he shall teach you all things, and bring all things to your remembrance, whatsoever I have said unto you."</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"But when the Father sends the Advocate as my representative — that is, the Holy Spirit — he will teach you everything and will remind you of everything I have told you."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed">The Holy Spirit serves as our divine Teacher — illuminating truth, bringing Scripture to mind when we need it most, and guiding us into deeper understanding of God's Word.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=John+16%3A13&version=KJV;NLT" target="_blank" class="cross-ref">John 16:13</a>
+        <a href="https://www.biblegateway.com/passage/?search=1+Corinthians+2%3A10-14&version=KJV;NLT" target="_blank" class="cross-ref">1 Corinthians 2:10–14</a>
+      </div>
+    </div>
+
+    <!-- Question 4.5 -->
+    <div class="mb-10">
+      <h3 class="font-display text-xl mb-4 font-semibold">5. How may we receive the help of the Holy Spirit as we study?</h3>
+      
+      <div class="verse-card rounded-lg p-5 mb-4" style="background: var(--cream);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">Luke 11:13</p>
+        <div class="kjv-text verse-text">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">KJV</p>
+          <p class="italic leading-relaxed">"If ye then, being evil, know how to give good gifts unto your children: how much more shall your heavenly Father give the Holy Spirit to them that ask him?"</p>
+        </div>
+        <div class="nlt-text verse-text mt-4 hidden">
+          <p class="text-sm mb-1 font-ui" style="color: var(--gold-dark);">NLT</p>
+          <p class="italic leading-relaxed">"So if you sinful people know how to give good gifts to your children, how much more will your heavenly Father give the Holy Spirit to those who ask him."</p>
+        </div>
+      </div>
+
+      <p class="leading-relaxed mb-4"><strong>Simply ask!</strong> Here is the secret: opening your heart to God in prayer before studying His Word will aid you in a correct understanding and assure you of God's presence by His Spirit. Old gems of truth will shine with new luster, and the discovery of new truth will strengthen your faith. Best of all, Jesus will become a Living Presence in your life.</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://www.biblegateway.com/passage/?search=James+1%3A5&version=KJV;NLT" target="_blank" class="cross-ref">James 1:5</a>
+        <a href="https://www.biblegateway.com/passage/?search=Jeremiah+29%3A13&version=KJV;NLT" target="_blank" class="cross-ref">Jeremiah 29:13</a>
+        <a href="https://www.biblegateway.com/passage/?search=Matthew+7%3A7-8&version=KJV;NLT" target="_blank" class="cross-ref">Matthew 7:7–8</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament max-w-3xl mx-auto px-6"><span class="ornament-icon">✦</span></div>
+
+  <!-- Closing Story -->
+  <section class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8 text-center">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Closing Illustration</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">The Hidden Treasure</h2>
+      <div class="w-16 h-0.5 rounded mx-auto" style="background: var(--gold);"></div>
+    </div>
+
+    <div class="rounded-xl p-6 md:p-8" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.2);">
+      <div class="drop-cap leading-relaxed" style="color: var(--ink-light);">
+        <p class="mb-4">A number of years ago a wealthy Englishman grew sick and died. When the day came for the reading of his will, his favorite daughter was bitterly disappointed. The father had designated that she was to receive "My Bible and all that it contains."</p>
+        <p class="mb-4">Knowing that the Bible was near and dear to his heart, she hid it away in an old trunk and went on living as before. As time passed, adversity reduced her to poverty. Broken in health and spirit, she turned at last to her father's Bible seeking answers.</p>
+        <p class="mb-4">Imagine her surprise as she leafed through that long-forgotten Book to find that between many of the pages her father had placed large Bank of England notes. She had been wealthy all the time and had been unaware of her good fortune because she had failed to realize what her father meant.</p>
+        <p>Our heavenly Father has left us a great treasure in the pages of this wonderful Book. We may not find bank notes between the pages, but we can find <strong>peace, joy, hope, faith, and eternal life</strong>. Priceless treasures! What greater treasure can one hope for?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Takeaways -->
+  <section class="max-w-3xl mx-auto px-6 py-12 fade-in">
+    <div class="mb-8 text-center">
+      <h2 class="font-display text-3xl" style="color: var(--burgundy);">Key Takeaways</h2>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="p-5 rounded-lg" style="background: var(--cream); border-left: 3px solid var(--gold);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">📖 The Bible's Source</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">All Scripture is inspired ("God-breathed"), conveyed through the Holy Spirit to human writers.</p>
+      </div>
+      <div class="p-5 rounded-lg" style="background: var(--cream); border-left: 3px solid var(--gold);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">🎯 The Bible's Purpose</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">Doctrine, reproof, correction, and instruction in righteousness — plus patience, comfort, and hope.</p>
+      </div>
+      <div class="p-5 rounded-lg" style="background: var(--cream); border-left: 3px solid var(--gold);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">✨ The Bible's Goal</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">To lead us to know Jesus Christ — the Living Word — and to receive eternal life through Him.</p>
+      </div>
+      <div class="p-5 rounded-lg" style="background: var(--cream); border-left: 3px solid var(--gold);">
+        <p class="font-ui text-xs tracking-widest uppercase mb-2" style="color: var(--gold-dark);">🔑 The Bible's Method</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ink-light);">Study with a willing heart, test all teaching by Scripture (like the Bereans), and pray for the Holy Spirit's guidance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Further Study Links -->
+  <section class="max-w-3xl mx-auto px-6 py-12 mb-12 fade-in">
+    <div class="mb-6 text-center">
+      <h2 class="font-display text-2xl" style="color: var(--burgundy);">Further Study Resources</h2>
+    </div>
+    <div class="grid gap-3 text-sm font-ui">
+      <a href="https://www.biblegateway.com/passage/?search=Psalm+119&version=KJV;NLT" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">📖</span> Read the full Scripture Reading — <strong>Psalm 119:9–16</strong> (KJV & NLT side-by-side)
+      </a>
+      <a href="https://www.biblegateway.com/passage/?search=Hebrews+4%3A12-13&version=KJV;NLT" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">⚔️</span> Hebrews 4:12–13 — The Word of God is living and active
+      </a>
+      <a href="https://www.biblegateway.com/passage/?search=Isaiah+40%3A8&version=KJV;NLT" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">🌿</span> Isaiah 40:8 — The grass withers, the flower fades, but the word of God endures forever
+      </a>
+      <a href="https://www.biblegateway.com/passage/?search=Deuteronomy+29%3A29&version=KJV;NLT" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">🔮</span> Deuteronomy 29:29 — The secret things belong to the Lord, but things revealed belong to us
+      </a>
+      <a href="https://enduringword.com/bible-commentary/2-timothy-3/" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">📚</span> Enduring Word Commentary on 2 Timothy 3 — Deeper study on inspiration
+      </a>
+      <a href="https://www.blueletterbible.org/Comm/mhc/Act/Act_017.cfm" target="_blank" class="block p-4 rounded-lg transition-all hover:shadow-md" style="background: var(--cream); color: var(--ink);">
+        <span style="color: var(--gold-dark);">📚</span> Matthew Henry's Commentary on Acts 17 — The Berean example
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-10 px-6" style="background: var(--cream); border-top: 1px solid rgba(201, 168, 76, 0.2);">
+    <p class="font-display text-lg italic mb-2" style="color: var(--gold-dark);">"Thy word is a lamp unto my feet, and a light unto my path."</p>
+    <p class="font-ui text-xs tracking-widest uppercase" style="color: var(--ink-light);">— Psalm 119:105 KJV</p>
+    <p class="font-ui text-xs mt-6" style="color: var(--ink-light);">20th Century Bible Course — Lesson 1 of 20</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-20 right-8 w-10 h-10 rounded-full flex items-center justify-center opacity-60 hover:opacity-100 transition-all font-ui text-lg" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.3); color: var(--gold-dark);" aria-label="Back to top">↑</button>
+
+  <script>
+    // ── Theme Toggle ──
+    const html = document.documentElement;
+    const body = document.body;
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+
+    // Check saved preference
+    const savedTheme = localStorage.getItem('bible-theme') || 'light';
+    body.setAttribute('data-theme', savedTheme);
+    icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    toggle.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', next);
+      icon.textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('bible-theme', next);
+    });
+
+    // ── Translation Toggle ──
+    let globalTranslation = 'kjv';
+
+    function setGlobalTranslation(mode) {
+      globalTranslation = mode;
+      
+      // Update buttons
+      document.querySelectorAll('#globalKjv, #globalNlt, #globalBoth').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('global' + mode.charAt(0).toUpperCase() + mode.slice(1)).classList.add('active');
+
+      // Update all verse displays
+      document.querySelectorAll('.verse-card').forEach(card => {
+        const kjv = card.querySelector('.kjv-text');
+        const nlt = card.querySelector('.nlt-text');
+        if (!kjv || !nlt) return;
+
+        if (mode === 'kjv') {
+          kjv.classList.remove('hidden');
+          nlt.classList.add('hidden');
+        } else if (mode === 'nlt') {
+          kjv.classList.add('hidden');
+          nlt.classList.remove('hidden');
+        } else {
+          kjv.classList.remove('hidden');
+          nlt.classList.remove('hidden');
+        }
+      });
+    }
+
+    // ── Accordion ──
+    function toggleAccordion(btn) {
+      const content = btn.nextElementSibling;
+      const arrow = btn.querySelector('.accordion-arrow');
+      content.classList.toggle('open');
+      arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // ── Progress Bar ──
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ── Fade-in on Scroll ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
