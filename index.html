@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lesson 1 — Exploring Your Textbook | 20th Century Bible Course</title>
-<script src="tailwinds.js"></script>  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="tailwinds.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #c9a84c;
@@ -128,6 +129,172 @@
         radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.05) 0%, transparent 50%);
     }
+
+    /* ── Timeline Section ── */
+    .timeline-line {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--gold), var(--burgundy), var(--gold));
+      border-radius: 2px;
+    }
+    @media (min-width: 768px) { .timeline-line { left: 50%; transform: translateX(-50%); } }
+
+    .tl-era {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .tl-era-header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      background: var(--cream);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .tl-era-header:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(201,168,76,0.15); }
+    .tl-era-dot {
+      width: 14px; height: 14px; min-width: 14px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 0 3px var(--parchment);
+    }
+    .tl-era-arrow {
+      margin-left: auto;
+      transition: transform 0.3s ease;
+      color: var(--gold-dark);
+      font-size: 0.9rem;
+    }
+    .tl-era-header[aria-expanded="true"] .tl-era-arrow { transform: rotate(180deg); }
+
+    .tl-era-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+    .tl-era-body.open { max-height: 20000px; }
+
+    .tl-entry {
+      position: relative;
+      padding-left: 52px;
+      padding-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .tl-entry { padding-left: 0; display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; }
+      .tl-entry:nth-child(even) .tl-card { grid-column: 1; grid-row: 1; text-align: right; }
+      .tl-entry:nth-child(even) .tl-node { grid-column: 2; grid-row: 1; }
+      .tl-entry:nth-child(even) .tl-spacer { grid-column: 3; grid-row: 1; }
+      .tl-entry:nth-child(odd) .tl-spacer { grid-column: 1; grid-row: 1; }
+      .tl-entry:nth-child(odd) .tl-node { grid-column: 2; grid-row: 1; }
+      .tl-entry:nth-child(odd) .tl-card { grid-column: 3; grid-row: 1; }
+    }
+
+    .tl-node {
+      display: flex;
+      justify-content: center;
+      padding-top: 1rem;
+      position: relative;
+    }
+    .tl-node::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--gold), var(--burgundy));
+      border-radius: 2px;
+    }
+    .tl-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--burgundy);
+      position: relative;
+      z-index: 2;
+      margin-top: 0.25rem;
+    }
+    .tl-card {
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      background: var(--cream);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      transition: all 0.3s ease;
+      margin-bottom: 0.5rem;
+    }
+    .tl-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .tl-date {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 0.25rem;
+    }
+    .tl-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tl-founder {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gold-dark);
+      margin-bottom: 0.4rem;
+    }
+    .tl-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--ink-light);
+      margin-bottom: 0.5rem;
+    }
+    .tl-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--burgundy);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .tl-ref:hover { background: rgba(201,168,76,0.3); }
+    [data-theme="dark"] .tl-ref { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+    [data-theme="dark"] .tl-ref:hover { background: rgba(201,168,76,0.3); }
+
+    /* Family tree */
+    .tree-pre {
+      font-family: 'Source Sans Pro', monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--ink-light);
+      overflow-x: auto;
+      white-space: pre;
+      padding: 1.5rem;
+      background: var(--cream);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 0.75rem;
+    }
+    .tree-pre b { color: var(--burgundy); font-weight: 700; }
+    [data-theme="dark"] .tree-pre b { color: var(--gold-light); }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; }
@@ -328,6 +495,12 @@
       <a href="#part4" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
         <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 4</span>
         <p class="font-display text-lg mt-1">How We Can Sift Truth from Error</p>
+      </a>
+    </div>
+    <div class="mt-4">
+      <a href="#timeline" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--burgundy);">Appendix</span>
+        <p class="font-display text-lg mt-1">A Timeline of Christian Denominations</p>
       </a>
     </div>
   </nav>
@@ -935,6 +1108,755 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  APPENDIX: A TIMELINE OF CHRISTIAN DENOMINATIONS       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="timeline" class="max-w-4xl mx-auto px-6 py-20 fade-in">
+
+    <div class="ornament"><span class="ornament-icon">⛪</span></div>
+
+    <h2 class="font-display text-4xl md:text-5xl text-center mb-3 glow-gold" style="color: var(--burgundy);">A Timeline of Christian Denominations</h2>
+    <p class="text-center font-ui text-sm tracking-widest uppercase mb-3" style="color: var(--gold-dark);">From the First Church to Today</p>
+    <p class="text-center font-display text-lg italic max-w-2xl mx-auto mb-4" style="color: var(--ink-light);">"There is one body, and one Spirit, even as ye are called in one hope of your calling; One Lord, one faith, one baptism, One God and Father of all, who is above all, and through all, and in you all."</p>
+    <p class="text-center font-ui text-xs tracking-widest uppercase mb-12" style="color: var(--gold-dark);">— Ephesians 4:4–6</p>
+
+    <!-- ── Introduction ── -->
+    <div class="max-w-3xl mx-auto mb-12 fade-in">
+      <p class="drop-cap mb-4" style="line-height: 1.8;">Christianity began with one church — the community of believers who followed the risen Jesus Christ, empowered by the Holy Spirit at Pentecost (Acts 2). Today, researchers estimate there are over 45,000 Christian denominations worldwide. How did we get from one church to thousands?</p>
+      <p class="mb-4" style="line-height: 1.8;">This timeline traces the major branches, splits, and new movements in Christian history. It identifies founders, dates, and the reasons each group emerged. Understanding this history helps us see that divisions often arose not because the Bible is unclear, but because human beings — influenced by culture, politics, pride, and honest disagreement — have interpreted the Bible differently across the centuries.</p>
+    </div>
+
+    <!-- ── Why the Reformation Matters ── -->
+    <div class="max-w-3xl mx-auto mb-16 p-8 rounded-xl fade-in" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+      <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">Why the Protestant Reformation Matters</h3>
+
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full mb-3" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <span class="font-display text-lg" style="color: var(--ink);">1. It Put the Bible Back in the Hands of the People</span>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body mb-4">
+        <div class="px-6 py-4" style="line-height: 1.8; color: var(--ink-light);">For centuries, the Bible was available primarily in Latin, a language most ordinary people could not read. The Reformation, combined with the printing press, led to translations into German, English, French, and dozens of other languages. Martin Luther's German Bible (1534), William Tyndale's English New Testament (1526), and later the King James Version (1611) transformed the world.</div>
+      </div>
+
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full mb-3" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <span class="font-display text-lg" style="color: var(--ink);">2. It Challenged One Human Authority Over All Christians</span>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body mb-4">
+        <div class="px-6 py-4" style="line-height: 1.8; color: var(--ink-light);">The Reformers argued that no pope, council, or institution should have ultimate authority over a Christian's conscience — only Scripture, illuminated by the Holy Spirit, holds that place. This is the principle of "Sola Scriptura" (Scripture alone). It did not mean each person invents their own truth; it meant the Bible itself is the standard by which all teaching must be tested — exactly what the Bereans did in Acts 17:11.</div>
+      </div>
+
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full mb-3" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <span class="font-display text-lg" style="color: var(--ink);">3. It Recovered the Gospel of Grace</span>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body mb-4">
+        <div class="px-6 py-4" style="line-height: 1.8; color: var(--ink-light);">The Reformers proclaimed that salvation is a free gift of God received through faith, not something earned by human works, payments, or rituals. "Sola Fide" (faith alone) and "Sola Gratia" (grace alone) became rallying cries rooted in Ephesians 2:8–9.</div>
+      </div>
+
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full mb-3" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <span class="font-display text-lg" style="color: var(--ink);">4. It Also Created New Challenges</span>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body mb-4">
+        <div class="px-6 py-4" style="line-height: 1.8; color: var(--ink-light);">The Reformation's emphasis on individual Bible study, while freeing, also opened the door to countless competing interpretations. Without a single centralized authority, sincere believers reached different conclusions on baptism, the Lord's Supper, church governance, prophecy, and many other subjects. This is how one Reformation movement eventually became hundreds — and then thousands — of denominations. The Reformation was not a destination; it was a beginning.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════ THE TIMELINE ═══════════ -->
+    <h3 class="font-display text-3xl text-center mb-12 glow-gold" style="color: var(--burgundy);">The Timeline: From the First Church to Today</h3>
+
+    <!-- ─── ERA 1: Apostolic Era ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="true">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">The Apostolic Era</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">A.D. 30–100</span>
+        </div>
+        <span class="tl-era-arrow" style="transform:rotate(180deg)">▼</span>
+      </button>
+      <div class="tl-era-body open">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. ~30</div>
+            <div class="tl-name">The First Church at Pentecost</div>
+            <div class="tl-founder">Jesus Christ (founder); Peter, James, John (early leaders)</div>
+            <div class="tl-desc">After Christ's resurrection and ascension, the Holy Spirit fell at Pentecost. About 3,000 were baptized. Believers met in homes, shared meals, and devoted themselves to the apostles' teaching. There was one unified body of believers.</div>
+            <div>
+              <a href="https://www.biblegateway.com/passage/?search=Acts+2&version=KJV" target="_blank" class="tl-ref">📖 Acts 2</a>
+              <a href="https://www.britannica.com/topic/Pentecost-Christianity" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. ~49</div>
+            <div class="tl-name">Council of Jerusalem</div>
+            <div class="tl-founder">Peter, Paul, James</div>
+            <div class="tl-desc">The first church council settled whether Gentile converts must follow the Jewish law. The decision — guided by the Holy Spirit — opened Christianity to all nations without requiring circumcision. This was the first model for resolving disagreements through Scripture and prayer.</div>
+            <div>
+              <a href="https://www.biblegateway.com/passage/?search=Acts+15&version=KJV" target="_blank" class="tl-ref">📖 Acts 15</a>
+              <a href="https://www.britannica.com/event/Council-of-Jerusalem" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 45–95</div>
+            <div class="tl-name">The New Testament Written</div>
+            <div class="tl-founder">Paul, Matthew, Mark, Luke, John, Peter, James, Jude</div>
+            <div class="tl-desc">The apostles and their close associates wrote the Gospels, Acts, the Epistles, and Revelation. These circulated among churches and were read alongside the Old Testament in worship. By the end of the first century, the core of the New Testament was in wide use.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/New-Testament" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.biblegateway.com/passage/?search=2+Peter+3%3A15-16&version=KJV" target="_blank" class="tl-ref">📖 2 Peter 3:15–16</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 2: Post-Apostolic & Early Church ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">The Post-Apostolic & Early Church</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">A.D. 100–500</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">~A.D. 100–200</div>
+            <div class="tl-name">Rise of Bishops and Church Structure</div>
+            <div class="tl-founder">Ignatius of Antioch, Polycarp, Clement of Rome</div>
+            <div class="tl-desc">After the apostles died, local bishops gained increasing authority. Church governance shifted from the apostolic model toward a more hierarchical structure. The seeds of future division were planted as different regions developed different leadership traditions.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/bishop-Christianity" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/Saint-Ignatius-of-Antioch" target="_blank" class="tl-ref">📚 Ignatius</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 144</div>
+            <div class="tl-name">Marcionism (rejected)</div>
+            <div class="tl-founder">Marcion of Sinope</div>
+            <div class="tl-desc">Marcion rejected the Old Testament entirely and accepted only portions of Luke and Paul's letters. The church rejected his teaching, which motivated the formal process of defining the New Testament canon.</div>
+            <div>
+              <a href="https://www.britannica.com/biography/Marcion" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 313</div>
+            <div class="tl-name">Edict of Milan — Christianity Legalized</div>
+            <div class="tl-founder">Emperor Constantine</div>
+            <div class="tl-desc">Constantine ended the persecution of Christians and eventually made Christianity the favored religion of the Roman Empire. This marriage of church and state brought political power into theological decisions, profoundly shaping the centuries ahead.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Edict-of-Milan" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/Constantine-I-Roman-emperor" target="_blank" class="tl-ref">📚 Constantine</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 325</div>
+            <div class="tl-name">Council of Nicaea</div>
+            <div class="tl-founder">Emperor Constantine convened; ~300 bishops attended</div>
+            <div class="tl-desc">Addressed the Arian heresy (which denied Christ's full divinity). Produced the Nicene Creed, affirming that Jesus is "of one substance" with the Father — a foundational statement of faith for most of Christianity.</div>
+            <div>
+              <a href="https://www.britannica.com/event/Council-of-Nicaea-325" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/Nicene-Creed" target="_blank" class="tl-ref">📚 Nicene Creed</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 381</div>
+            <div class="tl-name">Council of Constantinople</div>
+            <div class="tl-founder">Emperor Theodosius; Gregory of Nazianzus</div>
+            <div class="tl-desc">Expanded the Nicene Creed to include the full divinity of the Holy Spirit. Clarified Trinitarian doctrine. The Nicene-Constantinopolitan Creed remains central to Catholic, Orthodox, and many Protestant churches.</div>
+            <div>
+              <a href="https://www.britannica.com/event/Council-of-Constantinople-381" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 397</div>
+            <div class="tl-name">Council of Carthage — NT Canon Affirmed</div>
+            <div class="tl-founder">North African bishops</div>
+            <div class="tl-desc">Formally recognized the 27-book New Testament canon. The council did not create the canon but confirmed what the churches had already been using for generations.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/biblical-canon" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 451</div>
+            <div class="tl-name">Council of Chalcedon</div>
+            <div class="tl-founder">Emperor Marcian; ~520 bishops</div>
+            <div class="tl-desc">Defined Christ as having two natures (fully divine and fully human) in one person. Churches that rejected this definition separated, forming the Oriental Orthodox churches. This was one of the earliest permanent splits in Christianity.</div>
+            <div>
+              <a href="https://www.britannica.com/event/Council-of-Chalcedon" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 3: First Major Splits ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">The First Major Splits</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">A.D. 451–1054</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">A.D. 451+</div>
+            <div class="tl-name">Oriental Orthodox Churches</div>
+            <div class="tl-founder">Dioscorus of Alexandria (Coptic); various patriarchs</div>
+            <div class="tl-desc">Rejected the Council of Chalcedon's definition of Christ's two natures. These ancient churches — Coptic (Egypt), Ethiopian, Armenian, Syriac, Indian (Malankara) — separated from both Rome and Constantinople. They represent some of the oldest continuous Christian traditions in the world.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Oriental-Orthodoxy" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/Coptic-Orthodox-Church-of-Alexandria" target="_blank" class="tl-ref">📚 Coptic Church</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4" style="border-color: var(--burgundy); border-width: 2px;">
+            <div class="tl-date" style="color: var(--burgundy); font-size: 0.8rem;">A.D. 1054 — Pivotal Event</div>
+            <div class="tl-name" style="font-size: 1.35rem;">The Great Schism — East-West Split</div>
+            <div class="tl-founder">Pope Leo IX (West) vs. Patriarch Michael Cerularius (East)</div>
+            <div class="tl-desc">The biggest division in early Christianity. Disputes over papal authority, the filioque clause (whether the Spirit proceeds from the Father "and the Son"), use of unleavened bread, and cultural/language differences led to mutual excommunication. This created two major branches: Roman Catholicism and Eastern Orthodoxy.</div>
+            <div>
+              <a href="https://www.britannica.com/event/East-West-Schism-1054" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/filioque" target="_blank" class="tl-ref">📚 Filioque</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1054–present</div>
+            <div class="tl-name">Roman Catholic Church</div>
+            <div class="tl-founder">Claims apostolic succession from Peter; Pope as head</div>
+            <div class="tl-desc">The Western church, centered in Rome, with the Pope as supreme leader. Teaches that Scripture and Sacred Tradition together are authoritative. Includes seven sacraments, veneration of Mary and the saints, purgatory, and papal infallibility (defined 1870). The largest single Christian body, with over 1.3 billion members today.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Roman-Catholicism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.vatican.va/" target="_blank" class="tl-ref">🔗 Vatican</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1054–present</div>
+            <div class="tl-name">Eastern Orthodox Church</div>
+            <div class="tl-founder">Patriarchs of Constantinople, Antioch, Jerusalem, Alexandria, Moscow</div>
+            <div class="tl-desc">The Eastern church, organized as a communion of self-governing national churches (Greek, Russian, Serbian, Romanian, etc.). Rejects papal supremacy. Rich liturgical tradition, icons, and mystical theology. Approximately 220 million members worldwide.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Eastern-Orthodoxy" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 4: Pre-Reformation Movements ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">Pre-Reformation Movements</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">1100s–1400s</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">~1170</div>
+            <div class="tl-name">Waldensians</div>
+            <div class="tl-founder">Peter Waldo (Lyon, France)</div>
+            <div class="tl-desc">A wealthy merchant who gave away his possessions and began preaching the Bible in the common language. Emphasized Scripture authority, simplicity, and lay preaching. Condemned by the Catholic Church as heretical. Often called "Reformers before the Reformation." They survived centuries of persecution and still exist today.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Waldenses" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.christianitytoday.com/history/people/moversandshakers/peter-waldo.html" target="_blank" class="tl-ref">📚 Christianity Today</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">~1380s</div>
+            <div class="tl-name">Lollards</div>
+            <div class="tl-founder">John Wycliffe (England)</div>
+            <div class="tl-desc">An Oxford professor who argued that the Bible — not the pope — is the supreme authority. He produced the first complete English translation of the Bible. His followers (Lollards) preached in English and challenged church corruption. Wycliffe is called the "Morning Star of the Reformation."</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Lollardy" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/John-Wycliffe" target="_blank" class="tl-ref">📚 Wycliffe</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">~1400s</div>
+            <div class="tl-name">Hussites / Moravians</div>
+            <div class="tl-founder">Jan Hus (Bohemia / Czech lands)</div>
+            <div class="tl-desc">Influenced by Wycliffe, Hus preached against corruption, indulgences, and papal authority. He was burned at the stake in 1415 despite a promise of safe conduct. His followers formed the Hussite movement, which later became the Moravian Brethren — one of the oldest Protestant denominations.</div>
+            <div>
+              <a href="https://www.britannica.com/biography/Jan-Hus" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/Moravian-church" target="_blank" class="tl-ref">📚 Moravians</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 5: Protestant Reformation ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false" style="border-color: var(--burgundy);">
+        <span class="tl-era-dot" style="width:18px;height:18px;min-width:18px;"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--burgundy); font-weight: 700;">The Protestant Reformation</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">1500s</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4" style="border-color: var(--burgundy); border-width: 2px;">
+            <div class="tl-date" style="color: var(--burgundy); font-size: 0.8rem;">1517 — Pivotal Event</div>
+            <div class="tl-name" style="font-size: 1.35rem;">Lutheranism</div>
+            <div class="tl-founder">Martin Luther (Germany)</div>
+            <div class="tl-desc">Luther posted his 95 Theses challenging the sale of indulgences. He taught justification by faith alone (sola fide), Scripture alone as the authority (sola scriptura), and the priesthood of all believers. Excommunicated in 1521. His German Bible translation made Scripture accessible to common people. Lutheranism became the first major Protestant denomination.</div>
+            <div>
+              <a href="https://www.britannica.com/biography/Martin-Luther" target="_blank" class="tl-ref">📚 Martin Luther</a>
+              <a href="https://www.britannica.com/event/Reformation" target="_blank" class="tl-ref">📚 Reformation</a>
+              <a href="https://www.britannica.com/topic/Lutheranism" target="_blank" class="tl-ref">📚 Lutheranism</a>
+              <a href="https://www.biblegateway.com/passage/?search=Romans+1%3A17&version=KJV" target="_blank" class="tl-ref">📖 Romans 1:17</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1523</div>
+            <div class="tl-name">Anabaptists</div>
+            <div class="tl-founder">Conrad Grebel, Felix Manz (Zurich, Switzerland)</div>
+            <div class="tl-desc">Broke from Zwingli's Reformation, insisting on believer's baptism only (rejecting infant baptism) and strict separation of church and state. Persecuted by both Catholics and other Protestants. They are the spiritual ancestors of Mennonites, Amish, and Hutterites.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Anabaptist" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://gameo.org/index.php?title=Anabaptism" target="_blank" class="tl-ref">📚 GAMEO</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1534</div>
+            <div class="tl-name">Church of England (Anglicanism)</div>
+            <div class="tl-founder">King Henry VIII (England)</div>
+            <div class="tl-desc">Henry broke from Rome primarily over the Pope's refusal to annul his marriage. The Act of Supremacy made the king head of the English church. Anglicanism retained much Catholic liturgy but adopted Protestant theology over time. Later gave rise to Episcopalians and influenced Methodism.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Church-of-England" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.churchofengland.org/about/history" target="_blank" class="tl-ref">🔗 Church of England</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1536</div>
+            <div class="tl-name">Calvinism / Reformed Churches</div>
+            <div class="tl-founder">John Calvin (Geneva, Switzerland)</div>
+            <div class="tl-desc">Calvin's "Institutes of the Christian Religion" systematized Reformed theology. Emphasized God's sovereignty, predestination, and the authority of Scripture. Calvin's Geneva became a model Protestant city. His theology profoundly influenced Presbyterians, Reformed churches, Puritans, Congregationalists, and many Baptists.</div>
+            <div>
+              <a href="https://www.britannica.com/biography/John-Calvin" target="_blank" class="tl-ref">📚 John Calvin</a>
+              <a href="https://www.britannica.com/topic/Calvinism" target="_blank" class="tl-ref">📚 Calvinism</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1560</div>
+            <div class="tl-name">Presbyterianism</div>
+            <div class="tl-founder">John Knox (Scotland)</div>
+            <div class="tl-desc">A student of Calvin, Knox brought Reformed theology to Scotland. Presbyterianism is governed by elders (presbyters) rather than bishops or a pope. Emphasized education, Bible reading, and covenantal theology. Spread widely to America, Korea, and beyond.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Presbyterianism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/John-Knox" target="_blank" class="tl-ref">📚 John Knox</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 6: Post-Reformation Growth ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">Post-Reformation Growth</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">1600s–1700s</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1580s+</div>
+            <div class="tl-name">Congregationalists / Puritans</div>
+            <div class="tl-founder">Robert Browne; later the Pilgrim Fathers</div>
+            <div class="tl-desc">Believed each local congregation should be self-governing — no bishops or presbyteries above them. The Puritans sought to "purify" the Church of England of Catholic elements. Pilgrims who sailed on the Mayflower (1620) were Congregationalist separatists. Founded Harvard (1636) to train ministers.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Congregationalism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/Puritanism" target="_blank" class="tl-ref">📚 Puritanism</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">~1609</div>
+            <div class="tl-name">Baptists</div>
+            <div class="tl-founder">John Smyth, Thomas Helwys (England/Netherlands)</div>
+            <div class="tl-desc">Emerged from English separatism. Insisted on believer's baptism by immersion, religious liberty, and the autonomy of the local church. Later split into many branches: General Baptists, Particular (Calvinist) Baptists, Southern Baptists (1845), and many more. Today one of the largest Protestant families worldwide.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Baptist" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1647</div>
+            <div class="tl-name">Quakers (Religious Society of Friends)</div>
+            <div class="tl-founder">George Fox (England)</div>
+            <div class="tl-desc">Fox urged reform toward an "inner light" — a direct experience of Christ in every person. Quakers rejected clergy, sacraments, and creeds. Known for pacifism, simplicity, and social justice. William Penn founded Pennsylvania as a Quaker colony with religious freedom.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Society-of-Friends" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1700s</div>
+            <div class="tl-name">Pietism / Moravian Brethren</div>
+            <div class="tl-founder">Philipp Spener, Count Zinzendorf (Germany)</div>
+            <div class="tl-desc">A renewal movement within Lutheranism emphasizing personal devotion, Bible study, and missionary zeal. The Moravians (descendants of the Hussites) became one of the first Protestant missionary movements. Deeply influenced John Wesley.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Pietism" target="_blank" class="tl-ref">📚 Pietism</a>
+              <a href="https://www.britannica.com/topic/Moravian-church" target="_blank" class="tl-ref">📚 Moravians</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1738–1784</div>
+            <div class="tl-name">Methodism</div>
+            <div class="tl-founder">John Wesley, Charles Wesley (England)</div>
+            <div class="tl-desc">The Wesley brothers led a revival within the Church of England, emphasizing personal holiness, disciplined Christian living, social justice, and heartfelt faith. After Wesley's death, Methodism became an independent denomination. Later branched into United Methodist, African Methodist Episcopal (AME), Wesleyan, Free Methodist, and others.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Methodism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/John-Wesley" target="_blank" class="tl-ref">📚 John Wesley</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 7: 19th Century ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">The Age of Movements</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">1800s</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1800s</div>
+            <div class="tl-name">The Second Great Awakening (USA)</div>
+            <div class="tl-founder">Charles Finney, Lyman Beecher, others</div>
+            <div class="tl-desc">A massive revival movement across America that produced new denominations, camp meetings, and social reform movements (abolition, temperance, women's rights, education). Created a culture of revivalism and lay Bible reading that shaped American Christianity.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Great-Awakening" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1801–1830s</div>
+            <div class="tl-name">Restoration Movement (Stone-Campbell)</div>
+            <div class="tl-founder">Barton W. Stone, Thomas & Alexander Campbell</div>
+            <div class="tl-desc">Sought to abandon all denominational creeds and restore the simple Christianity of the New Testament. Motto: "No creed but Christ, no book but the Bible." Eventually split into Churches of Christ, Christian Church (Disciples of Christ), and Independent Christian Churches.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Restoration-Movement" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/topic/Disciples-of-Christ" target="_blank" class="tl-ref">📚 Disciples of Christ</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1816</div>
+            <div class="tl-name">African Methodist Episcopal Church (AME)</div>
+            <div class="tl-founder">Richard Allen (Philadelphia)</div>
+            <div class="tl-desc">Allen, a former slave, founded the first independent Black denomination in America after experiencing racial discrimination in the Methodist church. The AME Church combined Wesleyan theology with the struggle for racial justice and dignity.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/African-Methodist-Episcopal-Church" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.ame-church.com/our-church/our-history/" target="_blank" class="tl-ref">🔗 AME Church</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1830</div>
+            <div class="tl-name">Latter-day Saints (Mormons)</div>
+            <div class="tl-founder">Joseph Smith (New York)</div>
+            <div class="tl-desc">Smith claimed to receive golden plates translated as the Book of Mormon. Teaches additional scripture beyond the Bible, a different view of the Godhead, and temple ordinances. Most mainstream Christians consider Mormon theology to be outside historic Christian orthodoxy due to its extra-biblical teachings.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Church-of-Jesus-Christ-of-Latter-day-Saints" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1844–1863</div>
+            <div class="tl-name">Seventh-day Adventist Church</div>
+            <div class="tl-founder">Ellen G. White, Joseph Bates, James White</div>
+            <div class="tl-desc">Emerged from the Millerite movement after the "Great Disappointment" of 1844. Emphasizes the seventh-day Sabbath (Saturday), the Second Coming of Christ, health reform, and the authority of Scripture. Officially organized in 1863.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Seventh-day-Adventist" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.adventist.org/who-are-seventh-day-adventists/" target="_blank" class="tl-ref">🔗 Adventist.org</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1845</div>
+            <div class="tl-name">Southern Baptist Convention</div>
+            <div class="tl-founder">Southern U.S. Baptists</div>
+            <div class="tl-desc">Split from Northern Baptists primarily over the issue of slavery. Became the largest Protestant denomination in the United States. Has since formally apologized for its role in supporting slavery and segregation.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Southern-Baptist-Convention" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1865</div>
+            <div class="tl-name">Salvation Army</div>
+            <div class="tl-founder">William Booth (London, England)</div>
+            <div class="tl-desc">A Methodist preacher who took the gospel to the streets, serving the poorest and most desperate. Organized like a military unit with uniforms and ranks. Combined evangelism with practical social service. Active in over 130 countries today.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/The-Salvation-Army" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.salvationarmy.org/ihq/history" target="_blank" class="tl-ref">🔗 Salvation Army</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1870s+</div>
+            <div class="tl-name">Holiness Movement</div>
+            <div class="tl-founder">Phoebe Palmer, various leaders</div>
+            <div class="tl-desc">A renewal within Methodism emphasizing "entire sanctification" — the belief that Christians can be made perfect in love in this life. Gave rise to the Church of the Nazarene, Church of God (Anderson), Wesleyan Church, and others. Also laid the groundwork for the Pentecostal movement.</div>
+            <div>
+              <a href="https://www.britannica.com/event/Holiness-movement" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1870s+</div>
+            <div class="tl-name">Jehovah's Witnesses</div>
+            <div class="tl-founder">Charles Taze Russell (Pennsylvania)</div>
+            <div class="tl-desc">Originally called "Bible Students," Russell rejected the Trinity, hell as eternal torment, and the immortality of the soul. Reorganized under J.F. Rutherford in the 1930s as Jehovah's Witnesses. Most mainstream Christians consider their theology outside historic orthodoxy due to rejection of the Trinity.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Jehovahs-Witnesses" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ERA 8: 20th & 21st Centuries ─── -->
+    <div class="tl-era fade-in">
+      <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full" aria-expanded="false">
+        <span class="tl-era-dot"></span>
+        <div>
+          <span class="font-display text-xl" style="color: var(--ink);">Global Expansion</span>
+          <span class="font-ui text-xs ml-2" style="color: var(--gold-dark);">20th & 21st Centuries</span>
+        </div>
+        <span class="tl-era-arrow">▼</span>
+      </button>
+      <div class="tl-era-body">
+        <div class="pt-6">
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1901–1906</div>
+            <div class="tl-name">Pentecostalism</div>
+            <div class="tl-founder">Charles Parham, William Seymour (Azusa Street Revival, Los Angeles)</div>
+            <div class="tl-desc">Emphasis on the "baptism of the Holy Spirit" with speaking in tongues as evidence. The Azusa Street Revival (1906) was racially integrated and sparked a global movement. Gave rise to Assemblies of God (1914), Church of God in Christ, Foursquare Church, and many others. Now the fastest-growing segment of Christianity worldwide.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Pentecostalism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/event/Azusa-Street-Revival" target="_blank" class="tl-ref">📚 Azusa Street</a>
+              <a href="https://www.biblegateway.com/passage/?search=Acts+2%3A1-4&version=KJV" target="_blank" class="tl-ref">📖 Acts 2:1–4</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1910s–1920s</div>
+            <div class="tl-name">Fundamentalist Movement</div>
+            <div class="tl-founder">Various conservative Protestant leaders</div>
+            <div class="tl-desc">A reaction against theological liberalism and the theory of evolution. Emphasized the "fundamentals" of the faith: biblical inerrancy, the virgin birth, the physical resurrection, and the literal second coming. Led to splits within Baptist, Presbyterian, and other denominations.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/fundamentalism-Christianity" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1927</div>
+            <div class="tl-name">Church of Christ, Scientist</div>
+            <div class="tl-founder">Mary Baker Eddy (founded 1879; grew in 1900s)</div>
+            <div class="tl-desc">Eddy taught that sickness and death are illusions to be overcome through prayer and correct understanding of God. Rejected traditional medical treatment. Based on Eddy's book "Science and Health with Key to the Scriptures" alongside the Bible.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Church-of-Christ-Scientist" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1948+</div>
+            <div class="tl-name">Evangelical Movement</div>
+            <div class="tl-founder">Billy Graham, Carl F.H. Henry, and others</div>
+            <div class="tl-desc">A broad movement across many denominations emphasizing personal conversion (being "born again"), the authority of Scripture, the cross of Christ, and active evangelism. Not a single denomination but a transdenominational identity shared by millions.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/Evangelicalism" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.britannica.com/biography/Billy-Graham" target="_blank" class="tl-ref">📚 Billy Graham</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1960s–1970s</div>
+            <div class="tl-name">Charismatic Movement</div>
+            <div class="tl-founder">Dennis Bennett, various Catholic and Protestant leaders</div>
+            <div class="tl-desc">Brought Pentecostal experiences (speaking in tongues, healing, prophecy) into mainline denominations — Catholic, Episcopal, Lutheran, and others — without requiring people to leave their churches. Led to the growth of independent charismatic churches.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/charismatic-movement" target="_blank" class="tl-ref">📚 Britannica</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4">
+            <div class="tl-date">1970s+</div>
+            <div class="tl-name">Non-Denominational / Independent Churches</div>
+            <div class="tl-founder">Various (Calvary Chapel, Vineyard, megachurch movement)</div>
+            <div class="tl-desc">A growing trend of churches that reject denominational labels, emphasizing simply being "Bible-based." Calvary Chapel (Chuck Smith, 1965) and Vineyard (John Wimber, 1977) were early examples. Today, non-denominational churches are among the fastest-growing in America and globally.</div>
+            <div>
+              <a href="https://www.britannica.com/topic/megachurch" target="_blank" class="tl-ref">📚 Britannica</a>
+              <a href="https://www.christianitytoday.com/news/2015/march/nondenominational-churches-growing-decline-denominational.html" target="_blank" class="tl-ref">📚 Christianity Today</a>
+            </div>
+          </div>
+
+          <div class="tl-card mb-4" style="border-color: var(--gold); border-width: 2px; text-align: center;">
+            <div class="tl-date">Present Day</div>
+            <div class="tl-name" style="font-size: 1.35rem;">~45,000+ Denominations Worldwide</div>
+            <div class="tl-desc" style="max-width: 600px; margin: 0 auto;">While the number seems staggering, many are cultural and regional variations of the same tradition. The major theological families remain: Catholic, Orthodox, Lutheran, Reformed/Presbyterian, Anglican, Baptist, Methodist/Wesleyan, Pentecostal/Charismatic, Adventist, Anabaptist, and Restorationist.</div>
+            <div>
+              <a href="https://www.pewresearch.org/religion/2011/12/19/global-christianity-exec/" target="_blank" class="tl-ref">📚 Pew Research</a>
+              <a href="https://www.gordonconwell.edu/center-for-global-christianity/" target="_blank" class="tl-ref">📚 Gordon-Conwell</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ FAMILY TREE ═══════════ -->
+    <div class="ornament mt-16"><span class="ornament-icon">🌳</span></div>
+    <h3 class="font-display text-2xl text-center mb-6 fade-in" style="color: var(--burgundy);">The Family Tree at a Glance</h3>
+    <div class="fade-in">
+      <pre class="tree-pre"><b>THE FIRST CHURCH</b> (Pentecost, A.D. ~30)
+│
+├── <b>Oriental Orthodox</b> (A.D. 451) ─── Coptic, Ethiopian, Armenian, Syriac
+│
+├── <b>THE GREAT SCHISM</b> (1054)
+│   ├── <b>Eastern Orthodox</b> ─── Greek, Russian, Serbian, Romanian, etc.
+│   │
+│   └── <b>Roman Catholic Church</b>
+│
+├── PRE-REFORMERS: Waldensians, Lollards, Hussites
+│
+├── <b>THE PROTESTANT REFORMATION</b> (1517)
+│   ├── <b>Lutheran</b> (Luther, 1517)
+│   ├── <b>Reformed / Calvinist</b> (Calvin, 1536)
+│   │   ├── Presbyterian (Knox, 1560)
+│   │   └── Congregationalist / Puritan
+│   ├── <b>Anglican</b> (Henry VIII, 1534)
+│   │   ├── Episcopal
+│   │   └── <b>Methodist</b> (Wesley, 1738)
+│   │       ├── AME Church (Allen, 1816)
+│   │       ├── Holiness Movement (1870s)
+│   │       │   └── Church of the Nazarene
+│   │       └── <b>Pentecostal</b> (Seymour, 1906)
+│   │           ├── Assemblies of God
+│   │           └── Charismatic Movement
+│   ├── <b>Anabaptist</b> (Grebel, 1523)
+│   │   ├── Mennonite
+│   │   ├── Amish
+│   │   └── Hutterite
+│   ├── <b>Baptist</b> (Smyth, ~1609)
+│   │   └── Southern Baptist (1845)
+│   └── Quaker (Fox, 1647)
+│
+├── <b>19TH-CENTURY MOVEMENTS</b>
+│   ├── Restoration Movement (Stone-Campbell, 1800s)
+│   │   ├── Churches of Christ
+│   │   └── Disciples of Christ
+│   ├── Seventh-day Adventist (White, 1863)
+│   ├── Salvation Army (Booth, 1865)
+│   └── Jehovah's Witnesses (Russell, 1870s)
+│
+└── <b>20TH–21ST CENTURY</b>
+    ├── Non-Denominational / Independent
+    ├── Evangelical Movement (transdenominational)
+    └── ~45,000+ denominations worldwide</pre>
+    </div>
+
+    <!-- ═══════════ KEY TAKEAWAYS ═══════════ -->
+    <div class="ornament mt-16"><span class="ornament-icon">✦</span></div>
+    <h3 class="font-display text-2xl text-center mb-8 fade-in" style="color: var(--burgundy);">Key Takeaways</h3>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-12 fade-in">
+
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="font-display text-lg mb-2" style="color: var(--burgundy);">1. Unity Was the Original Design</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Jesus prayed "that they all may be one" (John 17:21). The first church was united. Divisions came later, through a mix of sincere disagreement, human sin, cultural differences, and political power. The desire for unity is still God's heart.</p>
+      </div>
+
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="font-display text-lg mb-2" style="color: var(--burgundy);">2. The Reformation Recovered Essential Truths</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Its great gift was returning the Bible to the people and restoring the gospel of grace. Its unintended consequence was an explosion of competing interpretations. Both realities are part of the story.</p>
+      </div>
+
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="font-display text-lg mb-2" style="color: var(--burgundy);">3. No Human Institution Has All the Answers</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Every denomination is made up of imperfect people with incomplete understanding. "For we know in part, and we prophesy in part" (1 Corinthians 13:9). Humility is the appropriate posture for every church and every Christian.</p>
+      </div>
+
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="font-display text-lg mb-2" style="color: var(--burgundy);">4. The Bible Should Make Us Better People</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Jesus summarized the entire law in one sentence: "Therefore all things whatsoever ye would that men should do to you, do ye even so to them" (Matthew 7:12). If our study does not make us kinder and more loving, we have missed the point.</p>
+      </div>
+
+      <div class="p-6 rounded-xl md:col-span-2" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="font-display text-lg mb-2 text-center" style="color: var(--burgundy);">5. The Holy Spirit Is the Key</p>
+        <p class="text-sm text-center" style="color: var(--ink-light); line-height: 1.7;">The same God who inspired the Scriptures must illuminate them. "When he, the Spirit of truth, is come, he will guide you into all truth" (John 16:13). The secret is not joining the right denomination — it is opening your heart to God in prayer and being willing to follow wherever His truth leads.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mb-4 fade-in">
+      <p class="font-display text-xl italic" style="color: var(--gold-dark);">"Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me."</p>
+      <p class="font-ui text-xs tracking-widest uppercase mt-2" style="color: var(--ink-light);">— John 5:39</p>
+    </div>
+
+  </section>
+
   <!-- Footer -->
   <footer class="text-center py-10 px-6" style="background: var(--cream); border-top: 1px solid rgba(201, 168, 76, 0.2);">
     <p class="font-display text-lg italic mb-2" style="color: var(--gold-dark);">"Thy word is a lamp unto my feet, and a light unto my path."</p>
@@ -1020,6 +1942,16 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Timeline Accordion ──
+    function toggleTlAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const arrow = btn.querySelector('.tl-era-arrow');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
 
     // ── Smooth scroll for anchor links ──
     document.querySelectorAll('a[href^="#"]').forEach(link => {
