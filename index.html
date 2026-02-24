@@ -130,6 +130,149 @@
         radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.05) 0%, transparent 50%);
     }
 
+    /* ── How We Got the Bible Section ── */
+    .bible-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    .bible-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .bible-modal {
+      background: var(--parchment);
+      border: 2px solid var(--gold);
+      border-radius: 1rem;
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .bible-modal-overlay.active .bible-modal {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--cream);
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .modal-close:hover { background: var(--gold); color: #fff; }
+
+    .lang-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .lang-hebrew { background: rgba(107,29,42,0.12); color: var(--burgundy); }
+    .lang-aramaic { background: rgba(45,74,62,0.12); color: var(--forest); }
+    .lang-greek { background: rgba(30,60,120,0.15); color: #1e3c78; }
+    .lang-latin { background: rgba(160,125,46,0.15); color: var(--gold-dark); }
+    [data-theme="dark"] .lang-hebrew { background: rgba(212,96,122,0.2); color: var(--burgundy-light); }
+    [data-theme="dark"] .lang-aramaic { background: rgba(107,196,160,0.2); color: var(--forest); }
+    [data-theme="dark"] .lang-greek { background: rgba(100,140,220,0.2); color: #8aafee; }
+    [data-theme="dark"] .lang-latin { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+
+    .trans-card {
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      background: var(--cream);
+      border: 1px solid rgba(201,168,76,0.15);
+      transition: all 0.3s ease;
+    }
+    .trans-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .trans-type {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .type-word { background: rgba(107,29,42,0.12); color: var(--burgundy); }
+    .type-balance { background: rgba(45,74,62,0.12); color: var(--forest); }
+    .type-thought { background: rgba(30,60,120,0.12); color: #1e3c78; }
+    .type-para { background: rgba(160,125,46,0.12); color: var(--gold-dark); }
+    .type-messianic { background: rgba(120,60,140,0.12); color: #6b2d80; }
+    [data-theme="dark"] .type-word { background: rgba(212,96,122,0.2); color: var(--burgundy-light); }
+    [data-theme="dark"] .type-balance { background: rgba(107,196,160,0.2); color: var(--forest); }
+    [data-theme="dark"] .type-thought { background: rgba(100,140,220,0.2); color: #8aafee; }
+    [data-theme="dark"] .type-para { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+    [data-theme="dark"] .type-messianic { background: rgba(180,120,210,0.2); color: #c090e0; }
+
+    .eng-tl-entry {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .eng-tl-entry:last-child { border-bottom: none; }
+    .eng-tl-date {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--burgundy);
+      padding-top: 0.15rem;
+    }
+
+    .origin-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 999px;
+      border: 2px solid var(--gold);
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .origin-btn:hover {
+      background: var(--gold);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+    }
+
     /* ── Timeline Section ── */
     .timeline-line {
       position: absolute;
@@ -479,6 +622,12 @@
   <!-- Table of Contents -->
   <nav class="max-w-3xl mx-auto px-6 mb-16 fade-in">
     <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">Lesson Outline</h3>
+    <div class="mb-4">
+      <a href="#howwegotthebible" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+        <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--burgundy);">Prologue</span>
+        <p class="font-display text-lg mt-1">How We Got the Bible</p>
+      </a>
+    </div>
     <div class="grid md:grid-cols-2 gap-4">
       <a href="#part1" class="block p-4 rounded-lg transition-all hover:shadow-lg" style="background: var(--cream);">
         <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Part 1</span>
@@ -513,6 +662,572 @@
       <button onclick="setGlobalTranslation('both')" id="globalBoth" class="tab-btn px-5 py-2 rounded-full transition-all" style="font-weight: 600;">Both</button>
     </div>
     <p class="font-ui text-xs mt-2" style="color: var(--ink-light);">Toggle translations for all verses</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  PROLOGUE: HOW WE GOT THE BIBLE                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="howwegotthebible" class="max-w-3xl mx-auto px-6 py-16 fade-in">
+
+    <div class="mb-8">
+      <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--gold-dark);">Prologue</span>
+      <h2 class="font-display text-3xl md:text-4xl mt-2 mb-2" style="color: var(--burgundy);">How We Got the Bible</h2>
+      <div class="w-16 h-0.5 rounded" style="background: var(--gold);"></div>
+    </div>
+
+    <p class="drop-cap mb-6" style="line-height: 1.85;">The Bible you hold in your hands today did not fall from the sky as a finished book. It was written over approximately 1,500 years by about 40 different authors — kings, shepherds, fishermen, physicians, prophets, and scholars — on three continents, in three languages, yet with one unified message. Understanding how these ancient writings traveled from their original manuscripts to your bedside table deepens our appreciation for the remarkable providence behind every page.</p>
+
+    <!-- ── The Original Languages ── -->
+    <div class="ornament"><span class="ornament-icon">🖋️</span></div>
+    <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">The Original Languages</h3>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-10">
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <span class="lang-badge lang-hebrew mb-2">Hebrew</span>
+        <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">עברית</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">The primary language of the Old Testament. Written right to left, in a consonantal alphabet. Spoken by the Israelites from the time of Abraham through the Babylonian exile.</p>
+      </div>
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <span class="lang-badge lang-aramaic mb-2">Aramaic</span>
+        <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">ארמית</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Portions of Daniel and Ezra were written in Aramaic, the common language of the ancient Near East. Aramaic was the everyday spoken language of Jesus and His disciples.</p>
+      </div>
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <span class="lang-badge lang-greek mb-2">Greek</span>
+        <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">Ελληνικά</p>
+        <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">The entire New Testament was written in Koine (common) Greek — the universal language of the Roman Empire. This allowed the gospel to spread rapidly across the known world.</p>
+      </div>
+    </div>
+
+    <!-- ── Journey from Old to New ── -->
+    <div class="ornament"><span class="ornament-icon">📜</span></div>
+    <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">From Ancient Scrolls to One Book</h3>
+
+    <div class="space-y-4 mb-10">
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">①</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>~1400–400 B.C. — The Old Testament Written</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">Moses wrote the Torah (the first five books) around 1400 B.C. Over the next thousand years, prophets, poets, and historians added the remaining books. The Hebrew Bible (Tanakh) was organized into three divisions: the Law (Torah), the Prophets (Nevi'im), and the Writings (Ketuvim) — the same divisions Jesus referenced in <a href="https://www.biblegateway.com/passage/?search=Luke+24%3A44&version=KJV" target="_blank" style="color:var(--burgundy);text-decoration:underline;">Luke 24:44</a>.</p>
+            <span class="lang-badge lang-hebrew">Hebrew</span> <span class="lang-badge lang-aramaic">Aramaic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">②</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>~250 B.C. — The Septuagint (LXX)</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">Jewish scholars in Alexandria, Egypt translated the Hebrew Old Testament into Greek, creating the Septuagint. This became the Bible of Greek-speaking Jews and was the version most often quoted by the New Testament writers. It was a critical bridge between the Hebrew world and the Greek-speaking world into which Jesus was born.</p>
+            <span class="lang-badge lang-hebrew">Hebrew → </span><span class="lang-badge lang-greek">Greek</span>
+            <a href="https://www.britannica.com/topic/Septuagint" target="_blank" class="tl-ref ml-2">📚 Britannica</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">③</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>~A.D. 45–95 — The New Testament Written</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">The apostles and their close companions wrote the 27 books of the New Testament in Koine Greek. Paul's letters came first (starting ~A.D. 49), followed by the Gospels, Acts, the remaining epistles, and finally Revelation (~A.D. 95). These letters circulated among the churches and were recognized as authoritative Scripture alongside the Old Testament (<a href="https://www.biblegateway.com/passage/?search=2+Peter+3%3A15-16&version=KJV" target="_blank" style="color:var(--burgundy);text-decoration:underline;">2 Peter 3:15–16</a>).</p>
+            <span class="lang-badge lang-greek">Koine Greek</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">④</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>A.D. 397 — The Canon Confirmed</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">The Council of Carthage formally recognized the 27 books of the New Testament. The council did not create the canon — it confirmed what the churches had already recognized for generations. The criteria included apostolic authorship (or connection), consistency with accepted doctrine, and widespread use in the churches.</p>
+            <a href="https://www.britannica.com/topic/biblical-canon" target="_blank" class="tl-ref">📚 Canon</a>
+            <a href="https://www.biblegateway.com/passage/?search=2+Timothy+3%3A16&version=KJV" target="_blank" class="tl-ref">📖 2 Tim 3:16</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">⑤</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>A.D. 382–405 — The Latin Vulgate</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">Jerome, one of the greatest scholars of the early church, translated the Bible from Hebrew and Greek into Latin — the common language of the Western Roman Empire. His translation, the Vulgate, became the standard Bible of Western Christianity for over a thousand years. For centuries, this was the only Bible most Europeans ever heard.</p>
+            <span class="lang-badge lang-latin">Latin</span>
+            <a href="https://www.britannica.com/topic/Vulgate" target="_blank" class="tl-ref ml-2">📚 Vulgate</a>
+            <a href="https://www.britannica.com/biography/Saint-Jerome" target="_blank" class="tl-ref">📚 Jerome</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">⑥</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>A.D. 500–1500 — The Bible Locked in Latin</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">For roughly a thousand years, the Bible was primarily available only in Latin. Ordinary people could not read it for themselves. The institutional church controlled interpretation. Scattered attempts were made at translation (e.g., portions in Old English by the Venerable Bede, ~A.D. 735), but it was dangerous — even deadly — to translate Scripture into the common tongue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card" style="border-color: var(--burgundy); border-width: 2px;">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--burgundy);">⑦</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--burgundy);"><strong>1382–1611 — The Bible Comes to English</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">Brave men like Wycliffe, Tyndale, Coverdale, and the King James translators risked — and sometimes gave — their lives to put the Bible into the language of the people. Tyndale was strangled and burned at the stake in 1536 for his work. His dying prayer: <em>"Lord, open the King of England's eyes."</em> Within four years, King Henry VIII authorized an English Bible in every church.</p>
+            <div class="mt-3">
+              <button onclick="openModal('englishBibleModal')" class="origin-btn">📖 Explore the English Bible Timeline</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trans-card">
+        <div class="flex items-start gap-3">
+          <span class="font-display text-2xl" style="color: var(--gold);">⑧</span>
+          <div>
+            <p class="font-display text-lg mb-1" style="color: var(--ink);"><strong>1947–Today — The Dead Sea Scrolls & Modern Scholarship</strong></p>
+            <p class="text-sm mb-2" style="color: var(--ink-light); line-height: 1.75;">The discovery of the Dead Sea Scrolls in 1947 confirmed the remarkable accuracy of Old Testament transmission — manuscripts 1,000 years older than any previously known matched the existing Hebrew text with astonishing precision. Modern translations now benefit from thousands of ancient manuscripts, advanced linguistics, and archaeology. As of 2025, portions of the Bible have been translated into over 4,000 languages worldwide.</p>
+            <a href="https://www.britannica.com/topic/Dead-Sea-Scrolls" target="_blank" class="tl-ref">📚 Dead Sea Scrolls</a>
+            <a href="https://www.wycliffe.org.uk/about/our-impact/" target="_blank" class="tl-ref">📚 Wycliffe Translators</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Translation Philosophy ── -->
+    <div class="ornament"><span class="ornament-icon">⚖️</span></div>
+    <h3 class="font-display text-2xl mb-4 text-center" style="color: var(--burgundy);">Understanding Translation Approaches</h3>
+    <p class="text-center text-sm mb-8" style="color: var(--ink-light); max-width: 600px; margin: 0 auto;">Not all translations work the same way. Understanding the spectrum helps you choose the right Bible for your needs.</p>
+
+    <div class="p-6 rounded-xl mb-10" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <!-- Spectrum Bar -->
+      <div class="flex items-center justify-between mb-2 font-ui text-xs font-bold" style="color: var(--ink-light);">
+        <span>Word-for-Word</span>
+        <span>Balanced</span>
+        <span>Thought-for-Thought</span>
+        <span>Paraphrase</span>
+      </div>
+      <div class="w-full h-3 rounded-full mb-4" style="background: linear-gradient(to right, var(--burgundy), var(--forest), #1e3c78, var(--gold-dark));">
+      </div>
+      <div class="flex items-center justify-between font-ui text-xs" style="color: var(--ink-light);">
+        <span>KJV · NASB · ESV · LSB</span>
+        <span>NIV · CSB · NRSV</span>
+        <span>NLT · GNT</span>
+        <span>MSG · TPT</span>
+      </div>
+      <p class="text-xs text-center mt-4" style="color: var(--ink-light);">Word-for-word translations stay as close to the original language structure as possible. Thought-for-thought translations focus on conveying the original meaning in natural modern English. Paraphrases restate the Bible in very contemporary language. No translation is "wrong" — each approach has strengths.</p>
+    </div>
+
+    <!-- ── Major Modern Translations ── -->
+    <div class="ornament"><span class="ornament-icon">📚</span></div>
+    <h3 class="font-display text-2xl mb-4 text-center" style="color: var(--burgundy);">Major English Translations</h3>
+    <p class="text-center text-sm mb-8" style="color: var(--ink-light);">Click any translation for more information. Over 400 English translations exist — these are the most widely used.</p>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <button onclick="filterTranslations('all')" class="origin-btn text-xs px-3 py-1" style="border-width:1px;" data-filter="all">All</button>
+      <button onclick="filterTranslations('word')" class="origin-btn text-xs px-3 py-1" style="border-width:1px;" data-filter="word">Word-for-Word</button>
+      <button onclick="filterTranslations('balance')" class="origin-btn text-xs px-3 py-1" style="border-width:1px;" data-filter="balance">Balanced</button>
+      <button onclick="filterTranslations('thought')" class="origin-btn text-xs px-3 py-1" style="border-width:1px;" data-filter="thought">Thought-for-Thought</button>
+      <button onclick="filterTranslations('para')" class="origin-btn text-xs px-3 py-1" style="border-width:1px;" data-filter="para">Paraphrase</button>
+    </div>
+
+    <div id="translationGrid" class="grid md:grid-cols-2 gap-4 mb-10">
+
+      <!-- KJV -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">KJV</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">King James Version · 1611</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Commissioned by King James I of England and produced by 47 scholars. Known for its majestic, poetic language. The most influential English Bible for over 400 years. Based on the Textus Receptus (Greek) and Masoretic Text (Hebrew). Updated in 1769 to modern spelling.</p>
+        <a href="https://www.britannica.com/topic/King-James-Version" target="_blank" class="tl-ref">📚 Britannica</a>
+        <a href="https://www.biblegateway.com/versions/King-James-Version-KJV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NKJV -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NKJV</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">New King James Version · 1982</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A modern-English update of the KJV led by Arthur Farstad and 130 scholars. Retains the KJV's style and text base while replacing archaic "thee/thou" language. A popular choice for those who love the KJV but want easier readability.</p>
+        <a href="https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+        <a href="https://www.thomasnelsonbibles.com/nkjv/" target="_blank" class="tl-ref">🔗 Publisher</a>
+      </div>
+
+      <!-- ASV -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">ASV</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">American Standard Version · 1901</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">An American revision of the English Revised Version (1885). Highly literal, valued for its accuracy. Used "Jehovah" for God's name. Became the foundation for the NASB and RSV. Sometimes called the "Rock of Biblical Honesty."</p>
+        <a href="https://www.biblegateway.com/versions/American-Standard-Version-ASV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- RSV -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">RSV</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Revised Standard Version · 1952</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A revision of the ASV that aimed for modern English while retaining literary quality. The first major modern translation, it was widely adopted across denominations. Later revised as the NRSV (1989) and NRSVue (2021).</p>
+        <a href="https://www.biblegateway.com/versions/Revised-Standard-Version-RSV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NASB -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NASB</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">New American Standard Bible · 1971 (updated 1995, 2020)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Published by the Lockman Foundation as a revision of the ASV. Considered one of the most literally accurate modern translations. Widely used for serious Bible study and seminary work. The 2020 update modernized language while maintaining precision.</p>
+        <a href="https://www.lockman.org/" target="_blank" class="tl-ref">🔗 Lockman</a>
+        <a href="https://www.biblegateway.com/versions/New-American-Standard-Bible-NASB/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- AMP -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">AMP</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Amplified Bible · 1965 (Classic); 2015 (Updated)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Uses brackets and parentheses to "amplify" the original text by including additional words that help reveal shades of meaning. Produced by the Lockman Foundation. Helpful for deeper word study, though more verbose than other translations.</p>
+        <a href="https://www.biblegateway.com/versions/Amplified-Bible-AMP/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NIV -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NIV</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">New International Version · 1978 (updated 1984, 2011)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">The world's best-selling modern Bible translation. Produced by over 100 scholars from the Committee on Bible Translation. Balances accuracy with readability. The 2011 update adopted some gender-inclusive language. Published by Biblica/Zondervan.</p>
+        <a href="https://www.biblica.com/niv-bible/" target="_blank" class="tl-ref">🔗 Biblica</a>
+        <a href="https://www.biblegateway.com/versions/New-International-Version-NIV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- ESV -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">ESV</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">English Standard Version · 2001 (updated 2016, 2025)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Based on the RSV, revised by a team of over 100 scholars led by J.I. Packer. Combines word-for-word accuracy with literary excellence. Rapidly growing in popularity, especially in Reformed and evangelical churches. A 2025 text update refined 42 verses.</p>
+        <a href="https://www.crossway.org/articles/esv-bible-translation-update/" target="_blank" class="tl-ref">📚 2025 Update</a>
+        <a href="https://www.biblegateway.com/versions/English-Standard-Version-ESV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- CSB -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">CSB</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Christian Standard Bible · 2017 (prev. HCSB, 2004)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Originally the Holman Christian Standard Bible (2004), revised as the CSB in 2017 by 100+ scholars. Uses "optimal equivalence" — word-for-word where possible, thought-for-thought where necessary. Published by Holman Bible Publishers (LifeWay/SBC).</p>
+        <a href="https://csbible.com/" target="_blank" class="tl-ref">🔗 CSBible</a>
+        <a href="https://www.biblegateway.com/versions/Christian-Standard-Bible-CSB/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NRSV / NRSVue -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NRSVue</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">NRS Updated Edition · 2021 (prev. NRSV 1989, RSV 1952)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">The latest revision of the RSV lineage, published by the National Council of Churches. Widely used in academic, mainline Protestant, and Catholic settings. Uses gender-inclusive language where the original text refers to people in general. Incorporates Dead Sea Scroll findings.</p>
+        <a href="https://www.biblegateway.com/versions/New-Revised-Standard-Version-Updated-Edition-NRSVue-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NLT -->
+      <div class="trans-card" data-type="thought">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NLT</span>
+          <span class="trans-type type-thought">Thought-for-Thought</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">New Living Translation · 1996 (updated 2004, 2015)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A thorough revision of the Living Bible paraphrase (1971), now a genuine translation by 90 scholars. Communicates the original meaning in clear, natural English. Excellent for new readers and devotional reading. Published by Tyndale House.</p>
+        <a href="https://www.tyndale.com/nlt" target="_blank" class="tl-ref">🔗 Tyndale</a>
+        <a href="https://www.biblegateway.com/versions/New-Living-Translation-NLT-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- GNT -->
+      <div class="trans-card" data-type="thought">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">GNT</span>
+          <span class="trans-type type-thought">Thought-for-Thought</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Good News Translation · 1976 (updated 1992)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Also called "Today's English Version." Produced by the American Bible Society using simple, clear English accessible to non-native speakers. Known for its line-drawing illustrations. Uses a functional equivalence ("dynamic") approach.</p>
+        <a href="https://www.biblegateway.com/versions/Good-News-Translation-GNT-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- LSB -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">LSB</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Legacy Standard Bible · 2021</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A revision of the NASB 1995 developed by scholars at The Master's Seminary. Emphasizes word-for-word consistency to an exceptional degree. Uses "Yahweh" for God's covenant name (6,800+ times in the OT) and "slave" for <em>doulos</em>. Capitalizes pronouns referring to God.</p>
+        <a href="https://lsbible.org/" target="_blank" class="tl-ref">🔗 LSBible.org</a>
+        <a href="https://read.lsbible.org/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- NET -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">NET</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">New English Translation · 2005 (2nd ed. 2019)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">The first Bible created for the Internet, offering free online access. Produced by over 25 scholars. Its standout feature is 60,000+ translator notes explaining why translation decisions were made — an unmatched resource for study.</p>
+        <a href="https://netbible.org/" target="_blank" class="tl-ref">🔗 NETBible.org</a>
+        <a href="https://www.biblegateway.com/versions/NET-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- MEV -->
+      <div class="trans-card" data-type="word">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">MEV</span>
+          <span class="trans-type type-word">Word-for-Word</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Modern English Version · 2014</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Based on the Textus Receptus and Masoretic Text (like the KJV) but in modern English. Maintains the KJV's formal equivalence approach. Popular in charismatic/Pentecostal circles. Published by Charisma House.</p>
+        <a href="https://www.biblegateway.com/versions/Modern-English-Version-MEV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- TLV -->
+      <div class="trans-card" data-type="messianic">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">TLV</span>
+          <span class="trans-type type-messianic">Messianic</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Tree of Life Version · 2014</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A Messianic Jewish translation that restores the Jewish roots of Scripture. Uses "Yeshua" for Jesus, "ADONAI" for God's name, and Hebrew transliterations throughout. OT follows the traditional Jewish order. Published by Baker Books.</p>
+        <a href="https://tlvbiblesociety.org/" target="_blank" class="tl-ref">🔗 TLV Society</a>
+        <a href="https://www.biblegateway.com/versions/Tree-of-Life-Version-TLV-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- The Message -->
+      <div class="trans-card" data-type="para">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">MSG</span>
+          <span class="trans-type type-para">Paraphrase</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">The Message · 2002</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Written by pastor and scholar Eugene Peterson from the original languages. A vivid, contemporary paraphrase that reads like a novel. Excellent for fresh perspective on familiar passages but best used alongside a more literal translation for study.</p>
+        <a href="https://www.biblegateway.com/versions/The-Message-MSG-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- TPT -->
+      <div class="trans-card" data-type="para">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">TPT</span>
+          <span class="trans-type type-para">Paraphrase</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">The Passion Translation · 2017 (ongoing)</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">A paraphrase by Brian Simmons emphasizing God's passion and love. Uses Aramaic sources alongside Greek. Controversial — many scholars critique it as inserting meaning not present in the original text. Best read alongside other translations.</p>
+        <a href="https://www.biblegateway.com/versions/The-Passion-Translation-TPT-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- GW -->
+      <div class="trans-card" data-type="thought">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">GW</span>
+          <span class="trans-type type-thought">Thought-for-Thought</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">GOD'S WORD Translation · 1995</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Uses a theory called "closest natural equivalence" — aiming to be both accurate and naturally readable. Produced by God's Word to the Nations Mission Society. Written at a comfortable reading level for everyday use.</p>
+        <a href="https://godsword.org/" target="_blank" class="tl-ref">🔗 GOD'S WORD</a>
+        <a href="https://www.biblegateway.com/versions/GODS-WORD-Translation-GW-Bible/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+      <!-- CEB -->
+      <div class="trans-card" data-type="balance">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display text-lg font-bold" style="color: var(--ink);">CEB</span>
+          <span class="trans-type type-balance">Balanced</span>
+        </div>
+        <p class="font-ui text-xs mb-1" style="color: var(--gold-dark);">Common English Bible · 2011</p>
+        <p class="text-xs mb-2" style="color: var(--ink-light); line-height: 1.65;">Produced by a committee of 120 scholars and editors from 24 denominations. Aims for a seventh-grade reading level. Uses inclusive language where appropriate. Endorsed by a wide ecumenical range of churches.</p>
+        <a href="https://www.biblegateway.com/versions/Common-English-Bible-CEB/" target="_blank" class="tl-ref">📖 Read Online</a>
+      </div>
+
+    </div>
+
+    <!-- Translation count note -->
+    <div class="p-5 rounded-xl text-center mb-6" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <p class="font-display text-lg mb-2" style="color: var(--burgundy);">Bible Translation by the Numbers (2025)</p>
+      <div class="flex flex-wrap justify-center gap-6 mt-3">
+        <div>
+          <p class="font-display text-3xl" style="color: var(--gold-dark);">776</p>
+          <p class="font-ui text-xs" style="color: var(--ink-light);">Full Bibles</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl" style="color: var(--gold-dark);">1,798</p>
+          <p class="font-ui text-xs" style="color: var(--ink-light);">New Testaments</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl" style="color: var(--gold-dark);">4,007</p>
+          <p class="font-ui text-xs" style="color: var(--ink-light);">Languages with some Scripture</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl" style="color: var(--gold-dark);">400+</p>
+          <p class="font-ui text-xs" style="color: var(--ink-light);">English Translations</p>
+        </div>
+      </div>
+      <p class="text-xs mt-3" style="color: var(--ink-light);">Sources: <a href="https://www.wycliffe.org.uk/about/our-impact/" target="_blank" style="color: var(--burgundy); text-decoration: underline;">Wycliffe Bible Translators</a> · <a href="https://www.pewresearch.org/religion/" target="_blank" style="color: var(--burgundy); text-decoration: underline;">Pew Research</a></p>
+    </div>
+
+  </section>
+
+  <!-- ═══════════ ENGLISH BIBLE MODAL ═══════════ -->
+  <div id="englishBibleModal" class="bible-modal-overlay" onclick="if(event.target===this)closeModal('englishBibleModal')">
+    <div class="bible-modal">
+      <button class="modal-close" onclick="closeModal('englishBibleModal')" aria-label="Close">✕</button>
+      <h3 class="font-display text-2xl mb-1 pr-8" style="color: var(--burgundy);">How We Got the Bible in English</h3>
+      <p class="font-ui text-xs tracking-widest uppercase mb-6" style="color: var(--gold-dark);">From Hand-Copied Latin to Your Phone</p>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">~A.D. 735</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Venerable Bede</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Translated the Gospel of John into Old English on his deathbed. Among the earliest known translations of any Scripture into an English dialect.</p>
+          <a href="https://www.britannica.com/biography/Saint-Bede-the-Venerable" target="_blank" class="tl-ref mt-1">📚 Bede</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1382</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Wycliffe's Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">The first complete Bible in English, translated from the Latin Vulgate by John Wycliffe and his associates. Hand-copied by scribes. The Catholic Church condemned it and later exhumed and burned Wycliffe's bones.</p>
+          <a href="https://www.britannica.com/biography/John-Wycliffe" target="_blank" class="tl-ref mt-1">📚 Wycliffe</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1455</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Gutenberg's Printing Press</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Johannes Gutenberg printed the Latin Vulgate Bible — the first major book printed with movable type. The press made mass production of Bibles possible for the first time in history, setting the stage for the Reformation.</p>
+          <a href="https://www.britannica.com/biography/Johannes-Gutenberg" target="_blank" class="tl-ref mt-1">📚 Gutenberg</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1526</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--burgundy);"><strong>Tyndale's New Testament</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">William Tyndale produced the first printed English New Testament, translated directly from the Greek (not Latin). Smuggled into England in bales of cloth. Tyndale was betrayed, arrested, and executed in 1536. An estimated 80% of the KJV New Testament derives from Tyndale's work.</p>
+          <a href="https://www.britannica.com/biography/William-Tyndale" target="_blank" class="tl-ref mt-1">📚 Tyndale</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1535</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Coverdale Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Miles Coverdale produced the first complete printed English Bible. He drew on Tyndale's work plus German and Latin sources. The first English Bible to separate the Apocrypha into its own section.</p>
+          <a href="https://www.britannica.com/biography/Miles-Coverdale" target="_blank" class="tl-ref mt-1">📚 Coverdale</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1537</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Matthew's Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Published under the pseudonym "Thomas Matthew" (likely John Rogers). Combined Tyndale's OT and NT with Coverdale's work. The first English Bible to be officially licensed by the King.</p>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1539</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>The Great Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Authorized by Henry VIII, this was the first Bible officially placed in every church in England. Revised by Coverdale. Its large size (over 16 inches tall) gave it the name "Great Bible."</p>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1560</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Geneva Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Produced by English exiles in Geneva, Switzerland. The first English Bible with numbered verses. Included extensive study notes with Calvinist theology. The Bible of Shakespeare, John Bunyan, and the Pilgrims who sailed on the Mayflower. Outsold the KJV for decades after its release.</p>
+          <a href="https://www.britannica.com/topic/Geneva-Bible" target="_blank" class="tl-ref mt-1">📚 Geneva Bible</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1568</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Bishops' Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Produced by Church of England bishops to counter the Geneva Bible's Calvinist notes. Became the official pulpit Bible of the English church and served as the primary starting text for the KJV translators.</p>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1582/1610</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>Douay-Rheims Bible</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">The first Catholic English translation, produced by English Catholic exiles in France. NT published in Rheims (1582), OT in Douay (1610). Translated from the Latin Vulgate. Revised by Bishop Challoner (1749–1752), remaining the standard Catholic English Bible for over 200 years.</p>
+          <a href="https://www.britannica.com/topic/Douai-Reims-Bible" target="_blank" class="tl-ref mt-1">📚 Douay-Rheims</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry" style="background: rgba(201,168,76,0.08); border-radius: 0.5rem; padding: 0.75rem; border-bottom: 2px solid var(--gold);">
+        <div class="eng-tl-date" style="color: var(--burgundy); font-size: 0.85rem;">1611</div>
+        <div>
+          <p class="font-display text-lg mb-1" style="color: var(--burgundy);"><strong>King James Version (KJV)</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">Commissioned by King James I and produced by 47 scholars organized into six panels. Drew on Tyndale, the Bishops' Bible, and the best Greek and Hebrew texts available. Its majestic language shaped the English tongue for over 400 years. The most printed book in history. Updated to modern spelling in 1769.</p>
+          <a href="https://www.britannica.com/topic/King-James-Version" target="_blank" class="tl-ref mt-1">📚 KJV</a>
+          <a href="https://www.kingjamesbibleonline.org/1611-Bible/" target="_blank" class="tl-ref">📖 1611 Original</a>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1885</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>English Revised Version (ERV)</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">The first major revision of the KJV, produced by 50+ British and American scholars. Incorporated older and better Greek manuscripts discovered since 1611 (notably Codex Sinaiticus and Codex Vaticanus). The American edition became the ASV (1901).</p>
+        </div>
+      </div>
+
+      <div class="eng-tl-entry">
+        <div class="eng-tl-date">1952–now</div>
+        <div>
+          <p class="font-display text-base mb-1" style="color: var(--ink);"><strong>The Modern Translation Era</strong></p>
+          <p class="text-xs" style="color: var(--ink-light); line-height: 1.6;">The RSV (1952) launched an explosion of modern translations. Hundreds now exist, each with different approaches, audiences, and emphases. Major milestones: NASB (1971), NIV (1978), NKJV (1982), NLT (1996), ESV (2001), CSB (2017), LSB (2021), and the ESV 2025 update.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 p-4 rounded-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+        <p class="text-sm italic" style="color: var(--ink-light);">"The blood of the martyrs is the seed of the church — and the ink of the translators is the lifeblood of the Reformation."</p>
+        <div class="mt-3">
+          <a href="https://www.britannica.com/topic/biblical-translation" target="_blank" class="tl-ref">📚 Biblical Translation History</a>
+          <a href="https://www.biblegateway.com/versions/" target="_blank" class="tl-ref">📖 Compare All Versions</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════ PART 1 ═══════════════════════════════════ -->
@@ -1942,6 +2657,40 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Modal Open/Close ──
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.bible-modal-overlay.active').forEach(m => {
+          m.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    // ── Translation Grid Filter ──
+    function filterTranslations(type) {
+      document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.style.background = type === btn.dataset.filter ? 'var(--gold)' : '';
+        btn.style.color = type === btn.dataset.filter ? '#fff' : '';
+        btn.style.borderColor = 'var(--gold)';
+      });
+      document.querySelectorAll('#translationGrid .trans-card').forEach(card => {
+        if (type === 'all' || card.dataset.type === type) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
     // ── Timeline Accordion ──
     function toggleTlAccordion(btn) {
