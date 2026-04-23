@@ -8,26 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #c9a84c;
-      --gold-light: #e8d48b;
-      --gold-dark: #a07d2e;
-      --parchment: #faf6ed;
-      --ink: #2c1810;
-      --ink-light: #5a4030;
-      --cream: #f5f0e3;
-      --burgundy: #6b1d2a;
-      --burgundy-light: #8b3040;
-      --forest: #2d4a3e;
+      /* IBM Color Palette — Blue & White */
+      --gold: #0f62fe;         /* IBM Blue 60 — primary accent */
+      --gold-light: #78a9ff;   /* IBM Blue 40 — light accent */
+      --gold-dark: #0043ce;    /* IBM Blue 70 — dark accent */
+      --parchment: #ffffff;    /* Pure white background */
+      --ink: #161616;          /* IBM Gray 100 — primary text */
+      --ink-light: #525252;    /* IBM Gray 60 — secondary text */
+      --cream: #f4f4f4;        /* IBM Gray 10 — surface/card bg */
+      --burgundy: #0043ce;     /* IBM Blue 70 — headings/highlights */
+      --burgundy-light: #0f62fe; /* IBM Blue 60 */
+      --forest: #198038;       /* IBM Green 60 — kept for language badges */
     }
 
     [data-theme="dark"] {
-      --parchment: #1a1510;
-      --ink: #e8dcc8;
-      --ink-light: #c4b8a4;
-      --cream: #231e16;
-      --burgundy: #d4607a;
-      --burgundy-light: #e08898;
-      --forest: #6bc4a0;
+      --parchment: #161616;    /* IBM Gray 100 */
+      --ink: #f4f4f4;          /* IBM Gray 10 */
+      --ink-light: #c6c6c6;    /* IBM Gray 30 */
+      --cream: #262626;        /* IBM Gray 90 */
+      --burgundy: #78a9ff;     /* IBM Blue 40 */
+      --burgundy-light: #a6c8ff; /* IBM Blue 30 */
+      --forest: #42be65;       /* IBM Green 40 */
     }
 
     * { box-sizing: border-box; }
@@ -105,7 +106,7 @@
 
     /* Glow effect for dark mode */
     [data-theme="dark"] .glow-gold {
-      text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+      text-shadow: 0 0 20px rgba(15, 98, 254, 0.35);
     }
 
     /* Accordion */
@@ -121,13 +122,13 @@
     /* Background texture */
     .bg-texture {
       background-image: 
-        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.03) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(15, 98, 254, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 67, 206, 0.03) 0%, transparent 50%);
     }
     [data-theme="dark"] .bg-texture {
       background-image: 
-        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(107, 29, 42, 0.05) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(15, 98, 254, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(120, 169, 255, 0.05) 0%, transparent 50%);
     }
 
     /* ── How We Got the Bible Section ── */
@@ -193,20 +194,20 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .lang-hebrew { background: rgba(107,29,42,0.12); color: var(--burgundy); }
-    .lang-aramaic { background: rgba(45,74,62,0.12); color: var(--forest); }
-    .lang-greek { background: rgba(30,60,120,0.15); color: #1e3c78; }
-    .lang-latin { background: rgba(160,125,46,0.15); color: var(--gold-dark); }
-    [data-theme="dark"] .lang-hebrew { background: rgba(212,96,122,0.2); color: var(--burgundy-light); }
-    [data-theme="dark"] .lang-aramaic { background: rgba(107,196,160,0.2); color: var(--forest); }
-    [data-theme="dark"] .lang-greek { background: rgba(100,140,220,0.2); color: #8aafee; }
-    [data-theme="dark"] .lang-latin { background: rgba(201,168,76,0.2); color: var(--gold-light); }
+    .lang-hebrew { background: rgba(15,98,254,0.10); color: var(--burgundy); }
+    .lang-aramaic { background: rgba(25,128,56,0.10); color: var(--forest); }
+    .lang-greek { background: rgba(0,67,206,0.12); color: #0043ce; }
+    .lang-latin { background: rgba(120,169,255,0.15); color: var(--gold-dark); }
+    [data-theme="dark"] .lang-hebrew { background: rgba(120,169,255,0.2); color: var(--burgundy-light); }
+    [data-theme="dark"] .lang-aramaic { background: rgba(66,190,101,0.2); color: var(--forest); }
+    [data-theme="dark"] .lang-greek { background: rgba(166,200,255,0.2); color: #a6c8ff; }
+    [data-theme="dark"] .lang-latin { background: rgba(120,169,255,0.2); color: var(--gold-light); }
 
     .trans-card {
       padding: 1rem 1.25rem;
       border-radius: 0.75rem;
       background: var(--cream);
-      border: 1px solid rgba(201,168,76,0.15);
+      border: 1px solid rgba(15,98,254,0.15);
       transition: all 0.3s ease;
     }
     .trans-card:hover {
@@ -224,23 +225,23 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .type-word { background: rgba(107,29,42,0.12); color: var(--burgundy); }
-    .type-balance { background: rgba(45,74,62,0.12); color: var(--forest); }
-    .type-thought { background: rgba(30,60,120,0.12); color: #1e3c78; }
-    .type-para { background: rgba(160,125,46,0.12); color: var(--gold-dark); }
-    .type-messianic { background: rgba(120,60,140,0.12); color: #6b2d80; }
-    [data-theme="dark"] .type-word { background: rgba(212,96,122,0.2); color: var(--burgundy-light); }
-    [data-theme="dark"] .type-balance { background: rgba(107,196,160,0.2); color: var(--forest); }
-    [data-theme="dark"] .type-thought { background: rgba(100,140,220,0.2); color: #8aafee; }
-    [data-theme="dark"] .type-para { background: rgba(201,168,76,0.2); color: var(--gold-light); }
-    [data-theme="dark"] .type-messianic { background: rgba(180,120,210,0.2); color: #c090e0; }
+    .type-word { background: rgba(15,98,254,0.10); color: var(--burgundy); }
+    .type-balance { background: rgba(25,128,56,0.10); color: var(--forest); }
+    .type-thought { background: rgba(0,67,206,0.12); color: #0043ce; }
+    .type-para { background: rgba(120,169,255,0.15); color: var(--gold-dark); }
+    .type-messianic { background: rgba(138,43,226,0.10); color: #6929c4; }
+    [data-theme="dark"] .type-word { background: rgba(120,169,255,0.2); color: var(--burgundy-light); }
+    [data-theme="dark"] .type-balance { background: rgba(66,190,101,0.2); color: var(--forest); }
+    [data-theme="dark"] .type-thought { background: rgba(166,200,255,0.2); color: #a6c8ff; }
+    [data-theme="dark"] .type-para { background: rgba(120,169,255,0.2); color: var(--gold-light); }
+    [data-theme="dark"] .type-messianic { background: rgba(180,130,255,0.2); color: #be95ff; }
 
     .eng-tl-entry {
       display: grid;
       grid-template-columns: 80px 1fr;
       gap: 0.75rem;
       padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(15,98,254,0.15);
     }
     .eng-tl-entry:last-child { border-bottom: none; }
     .eng-tl-date {
@@ -270,7 +271,7 @@
       background: var(--gold);
       color: #fff;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+      box-shadow: 0 4px 12px rgba(15,98,254,0.3);
     }
 
     /* ── Timeline Section ── */
@@ -297,12 +298,12 @@
       padding: 1rem 1.25rem;
       border-radius: 0.75rem;
       background: var(--cream);
-      border: 1px solid rgba(201, 168, 76, 0.25);
+      border: 1px solid rgba(15,98,254,0.2);
       transition: all 0.3s ease;
       position: relative;
       z-index: 2;
     }
-    .tl-era-header:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(201,168,76,0.15); }
+    .tl-era-header:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(15,98,254,0.15); }
     .tl-era-dot {
       width: 14px; height: 14px; min-width: 14px;
       border-radius: 50%;
@@ -367,7 +368,7 @@
       padding: 1rem 1.25rem;
       border-radius: 0.75rem;
       background: var(--cream);
-      border: 1px solid rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(15,98,254,0.15);
       transition: all 0.3s ease;
       margin-bottom: 0.5rem;
     }
@@ -412,16 +413,16 @@
       text-transform: uppercase;
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      background: rgba(201, 168, 76, 0.12);
+      background: rgba(15,98,254,0.08);
       color: var(--burgundy);
       text-decoration: none;
       transition: all 0.2s ease;
       margin-right: 0.3rem;
       margin-bottom: 0.3rem;
     }
-    .tl-ref:hover { background: rgba(201,168,76,0.3); }
-    [data-theme="dark"] .tl-ref { background: rgba(201,168,76,0.15); color: var(--gold-light); }
-    [data-theme="dark"] .tl-ref:hover { background: rgba(201,168,76,0.3); }
+    .tl-ref:hover { background: rgba(15,98,254,0.3); }
+    [data-theme="dark"] .tl-ref { background: rgba(15,98,254,0.15); color: var(--gold-light); }
+    [data-theme="dark"] .tl-ref:hover { background: rgba(15,98,254,0.3); }
 
     /* Family tree */
     .tree-pre {
@@ -433,7 +434,7 @@
       white-space: pre;
       padding: 1.5rem;
       background: var(--cream);
-      border: 1px solid rgba(201,168,76,0.2);
+      border: 1px solid rgba(15,98,254,0.15);
       border-radius: 0.75rem;
     }
     .tree-pre b { color: var(--burgundy); font-weight: 700; }
@@ -458,12 +459,12 @@
 
     /* Commentary box */
     .commentary-box {
-      background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.02));
-      border: 1px solid rgba(201, 168, 76, 0.2);
+      background: linear-gradient(135deg, rgba(15,98,254,0.06), rgba(15,98,254,0.02));
+      border: 1px solid rgba(15,98,254,0.15);
     }
     [data-theme="dark"] .commentary-box {
-      background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.04));
-      border: 1px solid rgba(201, 168, 76, 0.25);
+      background: linear-gradient(135deg, rgba(15,98,254,0.08), rgba(15,98,254,0.04));
+      border: 1px solid rgba(15,98,254,0.2);
     }
 
     /* Cross reference badge */
@@ -472,19 +473,19 @@
       padding: 0.15rem 0.5rem;
       font-size: 0.75rem;
       border-radius: 999px;
-      background: rgba(201, 168, 76, 0.15);
+      background: rgba(15,98,254,0.15);
       color: var(--gold-dark);
       transition: all 0.2s ease;
       text-decoration: none;
       font-family: 'Source Sans Pro', sans-serif;
     }
     .cross-ref:hover {
-      background: rgba(201, 168, 76, 0.3);
+      background: rgba(15,98,254,0.3);
       transform: translateY(-1px);
     }
     [data-theme="dark"] .cross-ref {
       color: var(--gold-light);
-      background: rgba(201, 168, 76, 0.2);
+      background: rgba(15,98,254,0.15);
     }
 
     /* Progress bar */
@@ -518,7 +519,7 @@
     }
     .theme-toggle:hover {
       transform: scale(1.1);
-      box-shadow: 0 6px 25px rgba(201, 168, 76, 0.3);
+      box-shadow: 0 6px 25px rgba(15,98,254,0.3);
     }
 
     /* Hero section */
@@ -534,7 +535,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.1) 0%, transparent 60%);
+      background: radial-gradient(ellipse at center, rgba(15,98,254,0.08) 0%, transparent 60%);
       animation: pulse 8s ease-in-out infinite alternate;
     }
     @keyframes pulse {
@@ -557,7 +558,7 @@
     a.verse-link {
       color: var(--burgundy);
       text-decoration: underline;
-      text-decoration-color: rgba(107, 29, 42, 0.3);
+      text-decoration-color: rgba(15,98,254,0.25);
       text-underline-offset: 2px;
       transition: all 0.2s;
     }
@@ -623,7 +624,7 @@
   <nav class="max-w-3xl mx-auto px-6 mb-16 fade-in">
     <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">Lesson Outline</h3>
     <div class="mb-4">
-      <a href="#howwegotthebible" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+      <a href="#howwegotthebible" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.2);">
         <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--burgundy);">Prologue</span>
         <p class="font-display text-lg mt-1">How We Got the Bible</p>
       </a>
@@ -647,7 +648,7 @@
       </a>
     </div>
     <div class="mt-4">
-      <a href="#timeline" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+      <a href="#timeline" class="block p-4 rounded-lg transition-all hover:shadow-lg text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.2);">
         <span class="font-ui text-xs tracking-widest uppercase" style="color: var(--burgundy);">Appendix</span>
         <p class="font-display text-lg mt-1">A Timeline of Christian Denominations</p>
       </a>
@@ -656,7 +657,7 @@
 
   <!-- Translation Toggle (Global) -->
   <div class="max-w-3xl mx-auto px-6 mb-8 text-center fade-in">
-    <div class="inline-flex rounded-full p-1 font-ui text-sm" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.3);">
+    <div class="inline-flex rounded-full p-1 font-ui text-sm" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.3);">
       <button onclick="setGlobalTranslation('kjv')" id="globalKjv" class="tab-btn active px-5 py-2 rounded-full transition-all" style="font-weight: 600;">KJV</button>
       <button onclick="setGlobalTranslation('nlt')" id="globalNlt" class="tab-btn px-5 py-2 rounded-full transition-all" style="font-weight: 600;">NLT</button>
       <button onclick="setGlobalTranslation('both')" id="globalBoth" class="tab-btn px-5 py-2 rounded-full transition-all" style="font-weight: 600;">Both</button>
@@ -682,17 +683,17 @@
     <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">The Original Languages</h3>
 
     <div class="grid md:grid-cols-3 gap-4 mb-10">
-      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <span class="lang-badge lang-hebrew mb-2">Hebrew</span>
         <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">עברית</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">The primary language of the Old Testament. Written right to left, in a consonantal alphabet. Spoken by the Israelites from the time of Abraham through the Babylonian exile.</p>
       </div>
-      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <span class="lang-badge lang-aramaic mb-2">Aramaic</span>
         <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">ארמית</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Portions of Daniel and Ezra were written in Aramaic, the common language of the ancient Near East. Aramaic was the everyday spoken language of Jesus and His disciples.</p>
       </div>
-      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-5 rounded-xl text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <span class="lang-badge lang-greek mb-2">Greek</span>
         <p class="font-display text-xl mt-3 mb-1" style="color: var(--ink);">Ελληνικά</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">The entire New Testament was written in Koine (common) Greek — the universal language of the Roman Empire. This allowed the gospel to spread rapidly across the known world.</p>
@@ -806,7 +807,7 @@
     <h3 class="font-display text-2xl mb-4 text-center" style="color: var(--burgundy);">Understanding Translation Approaches</h3>
     <p class="text-center text-sm mb-8" style="color: var(--ink-light); max-width: 600px; margin: 0 auto;">Not all translations work the same way. Understanding the spectrum helps you choose the right Bible for your needs.</p>
 
-    <div class="p-6 rounded-xl mb-10" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+    <div class="p-6 rounded-xl mb-10" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
       <!-- Spectrum Bar -->
       <div class="flex items-center justify-between mb-2 font-ui text-xs font-bold" style="color: var(--ink-light);">
         <span>Word-for-Word</span>
@@ -1075,7 +1076,7 @@
     </div>
 
     <!-- Translation count note -->
-    <div class="p-5 rounded-xl text-center mb-6" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+    <div class="p-5 rounded-xl text-center mb-6" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
       <p class="font-display text-lg mb-2" style="color: var(--burgundy);">Bible Translation by the Numbers (2025)</p>
       <div class="flex flex-wrap justify-center gap-6 mt-3">
         <div>
@@ -1194,7 +1195,7 @@
         </div>
       </div>
 
-      <div class="eng-tl-entry" style="background: rgba(201,168,76,0.08); border-radius: 0.5rem; padding: 0.75rem; border-bottom: 2px solid var(--gold);">
+      <div class="eng-tl-entry" style="background: rgba(15,98,254,0.06); border-radius: 0.5rem; padding: 0.75rem; border-bottom: 2px solid var(--gold);">
         <div class="eng-tl-date" style="color: var(--burgundy); font-size: 0.85rem;">1611</div>
         <div>
           <p class="font-display text-lg mb-1" style="color: var(--burgundy);"><strong>King James Version (KJV)</strong></p>
@@ -1220,7 +1221,7 @@
         </div>
       </div>
 
-      <div class="mt-6 p-4 rounded-lg text-center" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="mt-6 p-4 rounded-lg text-center" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="text-sm italic" style="color: var(--ink-light);">"The blood of the martyrs is the seed of the church — and the ink of the translators is the lifeblood of the Reformation."</p>
         <div class="mt-3">
           <a href="https://www.britannica.com/topic/biblical-translation" target="_blank" class="tl-ref">📚 Biblical Translation History</a>
@@ -1760,7 +1761,7 @@
       <div class="w-16 h-0.5 rounded mx-auto" style="background: var(--gold);"></div>
     </div>
 
-    <div class="rounded-xl p-6 md:p-8" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.2);">
+    <div class="rounded-xl p-6 md:p-8" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
       <div class="drop-cap leading-relaxed" style="color: var(--ink-light);">
         <p class="mb-4">A number of years ago a wealthy Englishman grew sick and died. When the day came for the reading of his will, his favorite daughter was bitterly disappointed. The father had designated that she was to receive "My Bible and all that it contains."</p>
         <p class="mb-4">Knowing that the Bible was near and dear to his heart, she hid it away in an old trunk and went on living as before. As time passed, adversity reduced her to poverty. Broken in health and spirit, she turned at last to her father's Bible seeking answers.</p>
@@ -1842,7 +1843,7 @@
     </div>
 
     <!-- ── Why the Reformation Matters ── -->
-    <div class="max-w-3xl mx-auto mb-16 p-8 rounded-xl fade-in" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.25);">
+    <div class="max-w-3xl mx-auto mb-16 p-8 rounded-xl fade-in" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.2);">
       <h3 class="font-display text-2xl mb-6 text-center" style="color: var(--burgundy);">Why the Protestant Reformation Matters</h3>
 
       <button onclick="toggleTlAccordion(this)" class="tl-era-header w-full mb-3" aria-expanded="false">
@@ -2538,27 +2539,27 @@
 
     <div class="grid md:grid-cols-2 gap-6 mb-12 fade-in">
 
-      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="font-display text-lg mb-2" style="color: var(--burgundy);">1. Unity Was the Original Design</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Jesus prayed "that they all may be one" (John 17:21). The first church was united. Divisions came later, through a mix of sincere disagreement, human sin, cultural differences, and political power. The desire for unity is still God's heart.</p>
       </div>
 
-      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="font-display text-lg mb-2" style="color: var(--burgundy);">2. The Reformation Recovered Essential Truths</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Its great gift was returning the Bible to the people and restoring the gospel of grace. Its unintended consequence was an explosion of competing interpretations. Both realities are part of the story.</p>
       </div>
 
-      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="font-display text-lg mb-2" style="color: var(--burgundy);">3. No Human Institution Has All the Answers</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Every denomination is made up of imperfect people with incomplete understanding. "For we know in part, and we prophesy in part" (1 Corinthians 13:9). Humility is the appropriate posture for every church and every Christian.</p>
       </div>
 
-      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-6 rounded-xl" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="font-display text-lg mb-2" style="color: var(--burgundy);">4. The Bible Should Make Us Better People</p>
         <p class="text-sm" style="color: var(--ink-light); line-height: 1.7;">Jesus summarized the entire law in one sentence: "Therefore all things whatsoever ye would that men should do to you, do ye even so to them" (Matthew 7:12). If our study does not make us kinder and more loving, we have missed the point.</p>
       </div>
 
-      <div class="p-6 rounded-xl md:col-span-2" style="background: var(--cream); border: 1px solid rgba(201,168,76,0.2);">
+      <div class="p-6 rounded-xl md:col-span-2" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.15);">
         <p class="font-display text-lg mb-2 text-center" style="color: var(--burgundy);">5. The Holy Spirit Is the Key</p>
         <p class="text-sm text-center" style="color: var(--ink-light); line-height: 1.7;">The same God who inspired the Scriptures must illuminate them. "When he, the Spirit of truth, is come, he will guide you into all truth" (John 16:13). The secret is not joining the right denomination — it is opening your heart to God in prayer and being willing to follow wherever His truth leads.</p>
       </div>
@@ -2573,14 +2574,14 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-10 px-6" style="background: var(--cream); border-top: 1px solid rgba(201, 168, 76, 0.2);">
+  <footer class="text-center py-10 px-6" style="background: var(--cream); border-top: 1px solid rgba(15,98,254,0.15);">
     <p class="font-display text-lg italic mb-2" style="color: var(--gold-dark);">"Thy word is a lamp unto my feet, and a light unto my path."</p>
     <p class="font-ui text-xs tracking-widest uppercase" style="color: var(--ink-light);">— Psalm 119:105 KJV</p>
     <p class="font-ui text-xs mt-6" style="color: var(--ink-light);">20th Century Bible Course — Lesson 1 of 20</p>
   </footer>
 
   <!-- Back to Top -->
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-20 right-8 w-10 h-10 rounded-full flex items-center justify-center opacity-60 hover:opacity-100 transition-all font-ui text-lg" style="background: var(--cream); border: 1px solid rgba(201, 168, 76, 0.3); color: var(--gold-dark);" aria-label="Back to top">↑</button>
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-20 right-8 w-10 h-10 rounded-full flex items-center justify-center opacity-60 hover:opacity-100 transition-all font-ui text-lg" style="background: var(--cream); border: 1px solid rgba(15,98,254,0.3); color: var(--gold-dark);" aria-label="Back to top">↑</button>
 
   <script>
     // ── Theme Toggle ──
