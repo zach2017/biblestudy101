@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fifty of Seventy-Six — The Mindset of Henry Ossian Flipper</title>
+<meta name="description" content="Learn the story and the mindset of Henry Ossian Flipper, first African American graduate of West Point. Interactive lessons, quiz, and printable certificate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          /* IBM Carbon blue ramp */
+          ibm10:'#EDF5FF', ibm20:'#D0E2FF', ibm30:'#A6C8FF', ibm40:'#78A9FF',
+          ibm50:'#4589FF', ibm60:'#0F62FE', ibm70:'#0043CE', ibm80:'#002D9C',
+          ibm90:'#001D6C', ibm100:'#001141',
+          /* Carbon neutrals */
+          g10:'#F4F4F4', g20:'#E0E0E0', g30:'#C6C6C6', g60:'#6F6F6F',
+          g80:'#393939', g90:'#262626', g100:'#161616',
+          ok:'#24A148', err:'#DA1E28'
+        },
+        fontFamily: {
+          display: ['"IBM Plex Serif"','Georgia','serif'],
+          body:    ['"IBM Plex Sans"','system-ui','sans-serif'],
+          mono:    ['"IBM Plex Mono"','ui-monospace','monospace']
+        },
+        borderRadius: { none:'0' }
+      }
+    }
+  }
+</script>
+<style>
+  /* Fallback if the Tailwind CDN is unavailable */
+  html { font-size:16px; }
+  body { margin:0; font-family:"IBM Plex Sans",system-ui,sans-serif; background:#fff; color:#161616; }
+  html.dark body { background:#161616; color:#F4F4F4; }
+
+  :root{ --rule:#E0E0E0; --tick:#0F62FE; --hairline:rgba(15,98,254,.25); }
+  .dark{ --rule:#393939; --tick:#78A9FF; --hairline:rgba(120,169,255,.28); }
+
+  .rule-b{ border-bottom:1px solid var(--rule); }
+  .rule-t{ border-top:1px solid var(--rule); }
+  * { border-radius:0 !important; }   /* Carbon: square corners throughout */
+
+  /* Ledger rows */
+  .ledger-row{ transition:background-color .15s ease, box-shadow .15s ease; }
+  .ledger-row:hover{ background:#EDF5FF; box-shadow:inset 3px 0 0 #0F62FE; }
+  .dark .ledger-row:hover{ background:#001D6C; box-shadow:inset 3px 0 0 #78A9FF; }
+
+  /* Signature: the silence field — 1,461 daily strokes */
+  #silenceField{ display:flex; flex-wrap:wrap; gap:2px; align-items:flex-end; }
+  .tick{ width:2px; height:13px; background:#78A9FF; opacity:0; animation:strike .5s ease forwards; }
+  @keyframes strike{ to{ opacity:.38; } }
+  .tick.grad{ background:#fff; height:22px; animation:strikeWhite .6s ease forwards; box-shadow:0 0 12px rgba(255,255,255,.85); }
+  @keyframes strikeWhite{ to{ opacity:1; } }
+
+  /* Carbon-style 2x grid hairlines behind the hero */
+  .gridlines{
+    background-image:linear-gradient(to right, var(--hairline) 1px, transparent 1px);
+    background-size:12.5% 100%;
+  }
+
+  .quote-mark::before{ content:"\201C"; }
+  .quote-mark::after{ content:"\201D"; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid #0F62FE; outline-offset:2px;
+  }
+  .dark a:focus-visible, .dark button:focus-visible, .dark input:focus-visible{ outline-color:#78A9FF; }
+
+  .opt.correct{ border-color:#24A148 !important; background:rgba(36,161,72,.14); }
+  .opt.wrong{ border-color:#DA1E28 !important; background:rgba(218,30,40,.16); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-delay:0ms !important; transition-duration:.001ms !important; }
+    .tick{ opacity:.38; } .tick.grad{ opacity:1; }
+  }
+
+  /* Print: certificate only */
+  @media print{
+    @page{ size:landscape; margin:12mm; }
+    body *{ visibility:hidden !important; }
+    #certificate, #certificate *{ visibility:visible !important; }
+    #certificate{ position:absolute; left:0; top:0; width:100%; background:#fff !important; color:#161616 !important; }
+    .no-print{ display:none !important; }
+  }
+</style>
+</head>
+
+<body class="font-body antialiased bg-white text-g100 dark:bg-g100 dark:text-g10 selection:bg-ibm60 selection:text-white">
+
+<!-- ============ TOOLBAR ============ -->
+<header class="no-print sticky top-0 z-40 backdrop-blur bg-white/92 dark:bg-g100/92 rule-b">
+  <div class="mx-auto max-w-6xl px-4 py-2 flex items-center gap-3">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 bg-ibm60 dark:bg-ibm40 inline-block"></span>
+      <span class="font-mono text-[0.65rem] tracking-[0.18em] uppercase text-g60 dark:text-g30">
+        Flipper<span class="hidden sm:inline"> · Mindset Course</span>
+      </span>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-5 ml-5 font-mono text-[0.7rem] uppercase tracking-widest">
+      <a href="#record" class="hover:text-ibm60 dark:hover:text-ibm40">Record</a>
+      <a href="#silencing" class="hover:text-ibm60 dark:hover:text-ibm40">Silencing</a>
+      <a href="#mindset" class="hover:text-ibm60 dark:hover:text-ibm40">Mindset</a>
+      <a href="#practice" class="hover:text-ibm60 dark:hover:text-ibm40">Practice</a>
+      <a href="#quiz" class="hover:text-ibm60 dark:hover:text-ibm40">Quiz</a>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-1.5">
+      <div class="flex items-center border border-g30 dark:border-g80">
+        <button id="fsDown" aria-label="Decrease text size" class="px-2 py-1 font-mono text-xs hover:bg-ibm60 hover:text-white">A−</button>
+        <span id="fsLabel" class="px-1.5 font-mono text-[0.6rem] text-g60 dark:text-g30 tabular-nums">100%</span>
+        <button id="fsUp" aria-label="Increase text size" class="px-2 py-1 font-mono text-sm hover:bg-ibm60 hover:text-white">A+</button>
+        <button id="fsReset" aria-label="Reset text size" class="px-2 py-1 font-mono text-[0.6rem] border-l border-g30 dark:border-g80 hover:bg-ibm60 hover:text-white">Reset</button>
+      </div>
+      <button id="themeBtn" aria-label="Switch between dark and light mode"
+        class="px-2.5 py-1.5 border border-g30 dark:border-g80 font-mono text-xs hover:bg-ibm60 hover:text-white hover:border-ibm60">
+        <span id="themeIcon">☾</span><span id="themeText" class="hidden sm:inline ml-1">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative bg-ibm100 text-white overflow-hidden">
+  <div class="absolute inset-0 gridlines opacity-60" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-4 pt-14 pb-12 md:pt-20 md:pb-16">
+    <p class="font-mono text-[0.68rem] md:text-xs tracking-[0.3em] uppercase text-ibm40">
+      U.S. Military Academy · Class of 1877 · Ranked 50 of 76
+    </p>
+
+    <h1 class="font-display font-semibold leading-[0.98] mt-5 text-[2.5rem] sm:text-6xl md:text-7xl">
+      Nobody spoke to him<br>
+      <span class="text-ibm40">for four years.</span>
+    </h1>
+
+    <p class="mt-6 max-w-2xl text-lg md:text-xl text-ibm20 font-light">
+      Henry Ossian Flipper was born into slavery in Thomasville, Georgia, in 1856. On
+      14 June 1877 he took his diploma from General William T. Sherman and became the first
+      African American graduate of West Point. Between those two facts sit 1,461 days of
+      deliberate silence — and the mindset that outlasted it.
+    </p>
+
+    <div class="mt-10">
+      <div id="silenceField" aria-hidden="true" class="max-w-4xl"></div>
+      <p class="mt-4 font-mono text-[0.68rem] tracking-widest uppercase text-ibm30">
+        One stroke = one day of his cadetship. <span class="text-white">The white stroke is graduation day.</span>
+      </p>
+    </div>
+
+    <div class="mt-9 flex flex-wrap gap-3">
+      <a href="#record" class="px-6 py-3.5 bg-ibm60 text-white font-mono text-xs uppercase tracking-widest font-medium hover:bg-ibm50 transition">Start the course</a>
+      <a href="#quiz" class="px-6 py-3.5 border border-ibm40 text-ibm20 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-ibm100 hover:border-white transition">Skip to the quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE RECORD ============ -->
+<section id="record" class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+  <div class="flex items-baseline gap-4 border-b-2 border-ibm60 dark:border-ibm40 pb-3">
+    <h2 class="font-display text-3xl md:text-4xl font-semibold">The record</h2>
+    <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-g60 dark:text-g30">Dates, orders, facts</span>
+  </div>
+
+  <p class="mt-6 max-w-2xl text-base md:text-lg text-g80 dark:text-g20">
+    Read the file first. Everything in the mindset section grows out of these entries — tap
+    <span class="font-mono text-xs px-1.5 py-0.5 border border-ibm60 text-ibm60 dark:text-ibm40 dark:border-ibm40">More</span>
+    on any line for context and sources.
+  </p>
+
+  <div id="recordRows" class="mt-8"></div>
+</section>
+
+<!-- ============ SILENCING ============ -->
+<section id="silencing" class="bg-ibm100 text-white">
+  <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+    <div class="flex items-baseline gap-4 border-b-2 border-ibm60 pb-3">
+      <h2 class="font-display text-3xl md:text-4xl font-semibold">How he was treated</h2>
+      <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-ibm30">The silencing</span>
+    </div>
+
+    <div class="mt-10 grid md:grid-cols-5 gap-10">
+      <div class="md:col-span-3 space-y-5 text-base md:text-lg text-ibm20">
+        <p>
+          White cadets imposed what they called <strong class="text-white font-semibold">silencing</strong>: they would
+          not speak to him or socialize with him outside of official duty. It lasted his entire
+          four years. He ate alone, studied alone, and marched among people who acted as though
+          he were not there.
+        </p>
+        <p>
+          He roomed at first with James Webster Smith, the first Black cadet appointed to West Point
+          in 1870. Smith was hazed, physically abused, and eventually dismissed. After Smith left,
+          Flipper lived alone. Officers and professors generally treated him fairly on academic and
+          official matters, but the peer environment stayed hostile. Contemporary accounts called
+          it a kind of social martyrdom.
+        </p>
+        <p>
+          Almost the only ordinary human contact available to him came from staff — the barber,
+          the commissary clerk — people who simply spoke to him like a person.
+        </p>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button data-modal="silencing" class="px-4 py-2.5 border border-ibm40 font-mono text-[0.68rem] uppercase tracking-widest hover:bg-white hover:text-ibm100 hover:border-white transition">More: what silencing was</button>
+          <button data-modal="smith" class="px-4 py-2.5 border border-ibm40 font-mono text-[0.68rem] uppercase tracking-widest hover:bg-white hover:text-ibm100 hover:border-white transition">More: James W. Smith</button>
+        </div>
+      </div>
+
+      <blockquote class="md:col-span-2 border-l-2 border-ibm40 pl-5 self-start">
+        <p class="font-display text-xl md:text-2xl leading-snug quote-mark">no society for me to enjoy — no friends, male or female, for me to visit, or with whom I could have any social intercourse, so absolute was my isolation</p>
+        <footer class="mt-4 font-mono text-[0.65rem] uppercase tracking-widest text-ibm30">
+          Flipper, <cite class="not-italic">The Colored Cadet at West Point</cite>, 1878
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW HE MADE IT ============ -->
+<section id="endured" class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+  <div class="flex items-baseline gap-4 border-b-2 border-ibm60 dark:border-ibm40 pb-3">
+    <h2 class="font-display text-3xl md:text-4xl font-semibold">How he made it through</h2>
+    <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-g60 dark:text-g30">Method, not luck</span>
+  </div>
+
+  <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-g20 dark:bg-g80 border border-g20 dark:border-g80" id="methodCards"></div>
+
+  <p class="mt-10 max-w-3xl text-lg md:text-xl font-display leading-snug">
+    He described the four years as <span class="quote-mark text-ibm60 dark:text-ibm40">patient endurance and hard and persistent work</span> —
+    lonely and often melancholy, but never surrendered. At graduation, the crowd applauded him.
+  </p>
+</section>
+
+<!-- ============ MINDSET ============ -->
+<section id="mindset" class="bg-ibm10 dark:bg-g90 rule-t rule-b">
+  <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+    <div class="flex items-baseline gap-4 border-b-2 border-ibm60 dark:border-ibm40 pb-3">
+      <h2 class="font-display text-3xl md:text-4xl font-semibold">The mindset</h2>
+      <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-g60 dark:text-g30">Four working principles</span>
+    </div>
+
+    <p class="mt-6 max-w-2xl text-base md:text-lg text-g80 dark:text-g20">
+      West Point later formalized what he demonstrated in the annual
+      <strong class="font-semibold">Henry O. Flipper Award</strong>, given to a cadet who shows leadership, self-discipline
+      and perseverance through unusual difficulty. These four principles are how that looks in practice.
+    </p>
+
+    <div class="mt-10 grid md:grid-cols-2 gap-6" id="pillarCards"></div>
+  </div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section id="practice" class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+  <div class="flex items-baseline gap-4 border-b-2 border-ibm60 dark:border-ibm40 pb-3">
+    <h2 class="font-display text-3xl md:text-4xl font-semibold">Your daily muster</h2>
+    <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-g60 dark:text-g30">Saved on this device</span>
+  </div>
+
+  <p class="mt-6 max-w-2xl text-base md:text-lg text-g80 dark:text-g20">
+    Mindset is a habit, not a mood. Check off each principle you actually acted on today. The
+    log resets every morning and counts your streak.
+  </p>
+
+  <div class="mt-8 grid md:grid-cols-2 gap-4" id="musterList"></div>
+
+  <div class="mt-6 flex flex-wrap items-center gap-4 font-mono text-xs uppercase tracking-widest">
+    <span class="px-4 py-2.5 bg-ibm60 text-white">Streak: <span id="streakVal" class="tabular-nums">0</span> days</span>
+    <span class="text-g60 dark:text-g30">Today: <span id="todayVal" class="tabular-nums">0</span>/4</span>
+    <button id="resetLog" class="underline underline-offset-4 text-g60 dark:text-g30 hover:text-ibm60 dark:hover:text-ibm40 no-print">Clear log</button>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="bg-ibm100 text-white no-print">
+  <div class="mx-auto max-w-3xl px-4 py-16 md:py-24">
+    <div class="flex items-baseline gap-4 border-b-2 border-ibm60 pb-3">
+      <h2 class="font-display text-3xl md:text-4xl font-semibold">The examination</h2>
+      <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-ibm30">12 questions · pass at 10</span>
+    </div>
+
+    <div class="mt-6 grid grid-cols-3 gap-px bg-ibm80 border border-ibm80 font-mono text-[0.65rem] uppercase tracking-widest">
+      <div class="bg-ibm100 p-4"><div class="text-ibm30">Best</div><div id="bestVal" class="text-ibm40 text-lg tabular-nums mt-1">—</div></div>
+      <div class="bg-ibm100 p-4"><div class="text-ibm30">Last</div><div id="lastVal" class="text-lg tabular-nums mt-1">—</div></div>
+      <div class="bg-ibm100 p-4"><div class="text-ibm30">Attempts</div><div id="attemptsVal" class="text-lg tabular-nums mt-1">0</div></div>
+    </div>
+
+    <div class="mt-8 flex items-center gap-3">
+      <div class="h-1 flex-1 bg-ibm80">
+        <div id="progressBar" class="h-1 bg-ibm40 transition-all duration-300" style="width:0%"></div>
+      </div>
+      <span id="progressLabel" class="font-mono text-[0.65rem] tracking-widest text-ibm30 tabular-nums">0 / 12</span>
+    </div>
+
+    <div id="quizCard" class="mt-8">
+      <p id="qNum" class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-ibm40">Question 1</p>
+      <h3 id="qText" class="font-display text-2xl md:text-3xl font-semibold mt-3 leading-snug"></h3>
+      <div id="qOptions" class="mt-6 space-y-3"></div>
+      <div id="qFeedback" class="mt-5 hidden border-l-2 pl-4 py-1 text-ibm20"></div>
+      <button id="nextBtn" class="mt-6 hidden px-6 py-3.5 bg-ibm60 text-white font-mono text-xs uppercase tracking-widest font-medium hover:bg-ibm50 transition">Next question</button>
+    </div>
+
+    <div id="results" class="mt-8 hidden">
+      <p class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-ibm40">Result</p>
+      <h3 id="resultTitle" class="font-display text-3xl md:text-4xl font-semibold mt-3"></h3>
+      <p id="resultBody" class="mt-4 text-lg text-ibm20"></p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <button id="retryBtn" class="px-6 py-3.5 border border-ibm40 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-ibm100 hover:border-white transition">Take it again</button>
+        <a id="certLink" href="#certificate" class="hidden px-6 py-3.5 bg-ibm60 text-white font-mono text-xs uppercase tracking-widest font-medium hover:bg-ibm50 transition">Get your certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATE ============ -->
+<section class="mx-auto max-w-5xl px-4 py-16 md:py-24">
+  <div id="certGate" class="no-print">
+    <div class="flex items-baseline gap-4 border-b-2 border-ibm60 dark:border-ibm40 pb-3">
+      <h2 class="font-display text-3xl md:text-4xl font-semibold">Certificate</h2>
+      <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-g60 dark:text-g30">Unlocks at 10 of 12</span>
+    </div>
+    <p id="gateMsg" class="mt-6 text-base md:text-lg text-g80 dark:text-g20">
+      Pass the examination and your certificate appears here, ready to print.
+    </p>
+
+    <div id="certForm" class="mt-6 hidden flex-wrap items-end gap-3">
+      <label class="block">
+        <span class="font-mono text-[0.65rem] uppercase tracking-widest text-g60 dark:text-g30">Name on certificate</span>
+        <input id="nameInput" type="text" maxlength="46" placeholder="Your full name"
+          class="mt-2 block w-72 max-w-full bg-g10 dark:bg-g90 border-b-2 border-g60 dark:border-g30 px-3 py-2.5 font-display text-lg focus:border-ibm60 outline-none">
+      </label>
+      <button id="printBtn" class="px-6 py-3.5 bg-ibm60 text-white font-mono text-xs uppercase tracking-widest font-medium hover:bg-ibm50 transition">Print certificate</button>
+    </div>
+  </div>
+
+  <div id="certificate" class="mt-10 hidden bg-white text-g100 p-3 sm:p-5">
+    <div class="border-4 border-ibm60 p-6 sm:p-10 text-center">
+      <div class="border border-ibm30 p-6 sm:p-10">
+        <div class="flex justify-center gap-1.5 mb-6" aria-hidden="true">
+          <span class="w-3 h-3 bg-ibm100 inline-block"></span>
+          <span class="w-3 h-3 bg-ibm70 inline-block"></span>
+          <span class="w-3 h-3 bg-ibm60 inline-block"></span>
+          <span class="w-3 h-3 bg-ibm40 inline-block"></span>
+          <span class="w-3 h-3 bg-ibm20 inline-block"></span>
+        </div>
+        <p class="font-mono text-[0.6rem] sm:text-[0.7rem] uppercase tracking-[0.35em] text-ibm60">Patient endurance · Hard and persistent work</p>
+        <h3 class="font-display text-2xl sm:text-4xl font-semibold mt-5 leading-tight">The Henry O. Flipper<br>Mindset Certificate</h3>
+        <p class="mt-6 font-mono text-[0.6rem] sm:text-xs uppercase tracking-[0.25em] text-g60">Awarded to</p>
+        <p id="certName" class="font-display text-3xl sm:text-5xl font-semibold mt-3 border-b-2 border-ibm60 inline-block px-6 pb-2">—</p>
+        <p class="mt-6 max-w-xl mx-auto text-sm sm:text-base text-g80">
+          for completing the study of Henry Ossian Flipper — born into slavery in 1856, first
+          African American graduate of the United States Military Academy, 14 June 1877 — and for
+          demonstrating command of the principles of unflinching resolve, controllable excellence,
+          dignity without bitterness, and the long horizon.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-8 sm:gap-16 font-mono text-[0.6rem] sm:text-xs uppercase tracking-widest">
+          <div><div id="certScore" class="text-lg sm:text-2xl font-semibold text-ibm60 tabular-nums">—</div><div class="mt-1 text-g60">Score</div></div>
+          <div><div id="certDate" class="text-lg sm:text-2xl font-semibold text-ibm60">—</div><div class="mt-1 text-g60">Date</div></div>
+          <div><div class="text-lg sm:text-2xl font-semibold text-ibm60 tabular-nums">50/76</div><div class="mt-1 text-g60">His class rank</div></div>
+        </div>
+        <p class="mt-8 font-display text-base sm:text-lg italic text-g80">
+          “If I cannot endure prejudice and persecutions… then I don't deserve the cadetship.”
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="rule-t no-print bg-g10 dark:bg-g90">
+  <div class="mx-auto max-w-6xl px-4 py-10 grid sm:grid-cols-2 gap-6 text-sm">
+    <div>
+      <p class="font-display text-xl font-semibold">Read him in his own words</p>
+      <ul class="mt-3 space-y-1.5">
+        <li><a class="underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40" href="https://docsouth.unc.edu/neh/flipper/menu.html" target="_blank" rel="noopener">The Colored Cadet at West Point (1878) — full text, UNC DocSouth</a></li>
+        <li><a class="underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40" href="https://www.gutenberg.org/ebooks/2448" target="_blank" rel="noopener">Same book, free ebook — Project Gutenberg</a></li>
+        <li><a class="underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40" href="https://archive.org/details/coloredcadetatwe00flip" target="_blank" rel="noopener">Scanned first edition — Internet Archive</a></li>
+        <li><a class="underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40" href="https://en.wikipedia.org/wiki/Henry_O._Flipper" target="_blank" rel="noopener">Overview of his life — Wikipedia</a></li>
+      </ul>
+    </div>
+    <div class="sm:text-right">
+      <p class="font-mono text-[0.65rem] uppercase tracking-widest text-g60 dark:text-g30">Your score and log are stored only on this device.</p>
+      <p class="mt-3 font-display text-lg">1,461 days. One diploma.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div id="modal" class="no-print fixed inset-0 z-50 hidden items-center justify-center p-4 bg-g100/70 backdrop-blur-sm">
+  <div role="dialog" aria-modal="true" aria-labelledby="modalTitle"
+       class="w-full max-w-lg max-h-[85vh] overflow-y-auto bg-white text-g100 dark:bg-g90 dark:text-g10 border-t-4 border-ibm60 shadow-2xl p-6 sm:p-8">
+    <div class="flex items-start justify-between gap-4">
+      <h3 id="modalTitle" class="font-display text-2xl font-semibold leading-tight"></h3>
+      <button id="modalClose" aria-label="Close" class="font-mono text-xl leading-none px-2 hover:text-ibm60">×</button>
+    </div>
+    <div id="modalBody" class="mt-4 space-y-3 text-base text-g80 dark:text-g20"></div>
+    <div id="modalLinks" class="mt-6 pt-4 rule-t space-y-1.5 text-sm"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   Safe storage — uses localStorage when available (opening
+   this file from disk), falls back to memory in sandboxes
+   that block it, so nothing ever throws.
+   ========================================================= */
+const Store = (() => {
+  const mem = {};
+  let ok = true;
+  try { const k='__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k); }
+  catch(e){ ok = false; }
+  return {
+    get(k, d=null){
+      try { const v = ok ? localStorage.getItem(k) : mem[k]; return v === null || v === undefined ? d : JSON.parse(v); }
+      catch(e){ return d; }
+    },
+    set(k, v){
+      try { const s = JSON.stringify(v); if (ok) localStorage.setItem(k, s); else mem[k] = s; }
+      catch(e){ mem[k] = JSON.stringify(v); }
+    },
+    available: ok
+  };
+})();
+const K = { theme:'flipper.theme', fs:'flipper.fontsize', best:'flipper.best', last:'flipper.last',
+            att:'flipper.attempts', name:'flipper.name', log:'flipper.log', streak:'flipper.streak',
+            lastLogDay:'flipper.lastday' };
+
+/* ================= THEME ================= */
+const root = document.documentElement;
+function applyTheme(t){
+  root.classList.toggle('dark', t === 'dark');
+  document.getElementById('themeIcon').textContent = t === 'dark' ? '☾' : '☀';
+  document.getElementById('themeText').textContent = t === 'dark' ? 'Dark' : 'Light';
+  Store.set(K.theme, t);
+}
+applyTheme(Store.get(K.theme, 'light'));
+document.getElementById('themeBtn').onclick = () =>
+  applyTheme(root.classList.contains('dark') ? 'light' : 'dark');
+
+/* ================= FONT SIZE ================= */
+const BASE = 16, MIN = 13, MAX = 24;
+let fs = Store.get(K.fs, BASE);
+function applyFS(v){
+  fs = Math.min(MAX, Math.max(MIN, v));
+  root.style.fontSize = fs + 'px';
+  document.getElementById('fsLabel').textContent = Math.round(fs / BASE * 100) + '%';
+  Store.set(K.fs, fs);
+}
+applyFS(fs);
+document.getElementById('fsUp').onclick    = () => applyFS(fs + 1);
+document.getElementById('fsDown').onclick  = () => applyFS(fs - 1);
+document.getElementById('fsReset').onclick = () => applyFS(BASE);
+
+/* ================= SILENCE FIELD ================= */
+(function(){
+  const field = document.getElementById('silenceField');
+  const DAYS = 1461; // 1 July 1873 → 14 June 1877
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < DAYS; i++){
+    const s = document.createElement('span');
+    s.className = i === DAYS - 1 ? 'tick grad' : 'tick';
+    s.style.animationDelay = (i * 0.55) + 'ms';
+    frag.appendChild(s);
+  }
+  field.appendChild(frag);
+})();
+
+/* ================= CONTENT DATA ================= */
+const RECORD = [
+  { d:'1856', t:'Born into slavery in Thomasville, Georgia', b:'Born 21 March 1856. His parents were owned by separate masters — a detail he opens his autobiography with.', m:'origins' },
+  { d:'1865–72', t:'Educated by the American Missionary Association, then Atlanta University', b:'After emancipation he took every year of schooling available to him, in schools built for the newly freed.', m:'schools' },
+  { d:'1873', t:'Nominated to West Point by Congressman James C. Freeman', b:'A Georgia congressman put his name forward. Flipper entered the Academy on 1 July 1873.', m:'nomination' },
+  { d:'1873–77', t:'Four years of silencing', b:'White cadets refused to speak to him outside official duty for the whole of his cadetship.', m:'silencing' },
+  { d:'14 Jun 1877', t:'Graduates 50th of 76 — diploma from General William T. Sherman', b:'Above average overall, with strength in engineering, law, French and Spanish. The crowd applauded him.', m:'graduation' },
+  { d:'1877', t:'Commissioned second lieutenant, 10th U.S. Cavalry', b:'One of the Buffalo Soldier regiments. He served capably as an officer and engineer.', m:'buffalo' },
+  { d:'1878', t:'Publishes The Colored Cadet at West Point', b:'Written at 22, one year out of the Academy — the primary source for nearly everything known about his cadetship.', m:'book' },
+  { d:'1881', t:'Unjust court-martial ends his Army career', b:'He was cleared and pardoned posthumously, decades later. The verdict was wrong; the record was corrected too late for him to see it.', m:'courtmartial' },
+  { d:'Today', t:'The Henry O. Flipper Award', b:'West Point gives it each year to a cadet who shows leadership, self-discipline and perseverance through unusual difficulty.', m:'award' }
+];
+
+const METHOD = [
+  { h:'Work the controllables', b:'Grades, drill, duty, bearing. He put his effort where effort still paid — and it paid above average.' },
+  { h:'Refuse retaliation', b:'He kept composure and dignity instead of trading insult for insult. Retaliating would have cost him the cadetship.' },
+  { h:'Take contact where it exists', b:'The barber. The commissary clerk. He accepted ordinary human connection wherever it was offered rather than going without it.' },
+  { h:'Know the history, stay anyway', b:'He knew earlier Black cadets had been driven out. He arrived, in his words, tremblingly yet confidently — and did not quit.' }
+];
+
+const PILLARS = [
+  { tag:'RESOLVE', h:'Unflinching resolve',
+    b:'He settled the question of quitting before the pressure started. A supporter told him he was fighting the battle of a struggling people and must resolve never to succumb — and he decided, once, in advance.',
+    ask:'What have you already half-decided to quit? Decide now, in calm conditions, so the decision is not made for you on a bad day.' , m:'resolve'},
+  { tag:'CONTROL', h:'Focus on controllable excellence',
+    b:'Social acceptance was withheld from him, so he stopped spending energy on it and spent it on grades, duty and personal integrity — the things that answered to his own effort.',
+    ask:'List what you actually control in your hardest situation. Move today\'s effort onto that list and off everything else.', m:'control'},
+  { tag:'DIGNITY', h:'Dignity without bitterness',
+    b:'He insisted on standing on exactly the same ground as every other cadet, rejecting lowered standards or special props: if I cannot endure prejudice and persecutions, then I don\'t deserve the cadetship.',
+    ask:'Where are you accepting a lower bar to make a hard thing easier? Raise it back and meet it.', m:'dignity'},
+  { tag:'HORIZON', h:'The long horizon',
+    b:'Insults and isolation were treated as obstacles to be outlasted, not as reasons to stop. He later described walking the path of uprightness even while traps were laid for him.',
+    ask:'Name the date this hard season ends. Measure today against that date, not against this morning\'s mood.', m:'horizon'}
+];
+
+const MODALS = {
+  origins:{ t:'Born into slavery, 1856', b:['Flipper was born in Thomasville, Georgia, on 21 March 1856. He devotes the first chapter of his autobiography to his family\'s experience in slavery, including the fact that each of his parents was owned by a different master.','His younger brothers also became respected figures in their communities — the family placed a heavy premium on education and excellence.'],
+    l:[['His life in outline (Wikipedia)','https://en.wikipedia.org/wiki/Henry_O._Flipper'],['Chapter 1, in his own words','https://docsouth.unc.edu/neh/flipper/flipper.html']]},
+  schools:{ t:'American Missionary Association schools', b:['After the Civil War, the American Missionary Association built and staffed schools across the South for freed people. Flipper attended them, then Atlanta University — the institution that became Clark Atlanta University.','This is the pipeline that made West Point possible: emancipation, then eight straight years of taking every scrap of schooling on offer.'],
+    l:[['American Missionary Association','https://en.wikipedia.org/wiki/American_Missionary_Association'],['Atlanta University','https://en.wikipedia.org/wiki/Clark_Atlanta_University']]},
+  nomination:{ t:'The nomination, 1873', b:['Appointments to West Point run through members of Congress. In 1873 Georgia Congressman James C. Freeman nominated Flipper, and he entered the Academy on 1 July 1873.','He arrived knowing precisely what had happened to the Black cadets before him. He described approaching "tremblingly yet confidently."'],
+    l:[['United States Military Academy','https://en.wikipedia.org/wiki/United_States_Military_Academy'],['The correspondence around his appointment','https://docsouth.unc.edu/neh/flipper/flipper.html']]},
+  silencing:{ t:'What "silencing" actually was', b:['Silencing was an organised social punishment used at West Point: cadets collectively refused to speak to or associate with an individual outside of required duty. Applied to Flipper on the basis of race, it ran for four straight years.','He described it as absolute isolation — no friends, male or female, and no social life of any kind. Officers and professors generally treated him fairly on academic and official matters; the hostility came from his peers.','Contemporary accounts described his cadetship as a form of social martyrdom.'],
+    l:[['Read his account (full text)','https://docsouth.unc.edu/neh/flipper/flipper.html'],['Editors\' summary of the book','https://docsouth.unc.edu/neh/flipper/summary.html']]},
+  smith:{ t:'James Webster Smith', b:['Smith was the first African American appointed to West Point, in 1870. He was hazed, physically abused, and eventually dismissed before he could graduate.','Flipper roomed with him at first. After Smith left, Flipper lived alone for the rest of his cadetship — and knew exactly what fate he was trying to avoid.'],
+    l:[['James Webster Smith','https://en.wikipedia.org/wiki/James_Webster_Smith'],['Flipper tells Smith\'s story (Ch. 5)','https://etc.usf.edu/lit2go/164/the-colored-cadet-at-west-point/']]},
+  graduation:{ t:'14 June 1877', b:['Flipper graduated 50th in a class of 76 — above average overall, with particular strength in engineering, law, French and Spanish. His diploma was handed to him by General William T. Sherman.','By reports of the day, the crowd applauded. Four years of silence ended with noise.'],
+    l:[['William T. Sherman','https://en.wikipedia.org/wiki/William_Tecumseh_Sherman'],['Graduation, in his own words','https://docsouth.unc.edu/neh/flipper/flipper.html']]},
+  buffalo:{ t:'The 10th U.S. Cavalry', b:['Flipper was commissioned a second lieutenant in the 10th Cavalry, one of the regiments of Black soldiers known as Buffalo Soldiers. He served as an officer and engineer, including notable drainage work at Fort Sill.','He was the first Black officer to command regular troops in the U.S. Army.'],
+    l:[['Buffalo Soldiers','https://en.wikipedia.org/wiki/Buffalo_Soldier'],['10th Cavalry Regiment','https://en.wikipedia.org/wiki/10th_Cavalry_Regiment_(United_States)']]},
+  book:{ t:'The Colored Cadet at West Point (1878)', b:['Published a year after graduation, when Flipper was 22. It covers his family\'s slavery, his schooling, the daily grind of plebe life, the ostracism, and the academic and military curriculum in detail.','He reprints newspaper and magazine articles written about him and corrects them where they were false — an early act of controlling his own record.'],
+    l:[['Full text (UNC DocSouth)','https://docsouth.unc.edu/neh/flipper/menu.html'],['Free ebook (Project Gutenberg)','https://www.gutenberg.org/ebooks/2448'],['Scanned original (Internet Archive)','https://archive.org/details/coloredcadetatwe00flip'],['Chapter-by-chapter (Lit2Go)','https://etc.usf.edu/lit2go/164/the-colored-cadet-at-west-point/']]},
+  courtmartial:{ t:'The 1881 court-martial', b:['While serving as post quartermaster, Flipper was accused of embezzlement. He was acquitted of that charge but convicted of conduct unbecoming an officer and dismissed from the Army in 1882.','He spent the rest of his life as a civil and mining engineer and never stopped contesting the verdict. Decades after his death the record was corrected: his discharge was changed to honorable in 1976, and he received a presidential pardon in 1999.','This is the hard half of the lesson. The mindset did not guarantee justice. It guaranteed he was never the reason he failed.'],
+    l:[['The case and its reversal','https://en.wikipedia.org/wiki/Henry_O._Flipper']]},
+  award:{ t:'The Henry O. Flipper Award', b:['West Point presents the award each year to a graduating cadet who has demonstrated leadership, self-discipline and perseverance in the face of unusual difficulties.','A bust of Flipper stands at the Academy. The man they silenced for four years is now the standard they measure endurance against.'],
+    l:[['United States Military Academy','https://en.wikipedia.org/wiki/United_States_Military_Academy'],['Henry O. Flipper','https://en.wikipedia.org/wiki/Henry_O._Flipper']]},
+  resolve:{ t:'Unflinching resolve', b:['Flipper decided in advance that he would not surrender, and treated that decision as closed. Every later insult was measured against a choice already made rather than reopening it.','A supporter urged him that he was fighting the battle of a struggling people and must resolve never to succumb. He carried that framing: quitting was not only personal failure, it was evidence against everyone who would follow him.'],
+    l:[['His account of arriving at West Point','https://docsouth.unc.edu/neh/flipper/flipper.html']]},
+  control:{ t:'Focus on controllable excellence', b:['Acceptance was not on offer, so he stopped bidding for it. What remained under his control — study, drill, duty, integrity — got all of the effort, and the results showed: above average in a demanding class, strong in engineering, law, French and Spanish.','This is not passivity. It is aggressive investment in the only accounts that pay.'],
+    l:[['Summary of his West Point years','https://docsouth.unc.edu/neh/flipper/summary.html']]},
+  dignity:{ t:'Dignity without bitterness', b:['Flipper refused both bitterness and special pleading. He wanted to stand on exactly the same ground as every other cadet, and rejected the idea that he needed lowered standards or governmental props to do it.','He wrote that if he could not endure prejudice and persecutions, he did not deserve the cadetship. Harsh — but it kept his achievement entirely his own, and unanswerable.'],
+    l:[['The Colored Cadet at West Point','https://docsouth.unc.edu/neh/flipper/menu.html']]},
+  horizon:{ t:'The long horizon', b:['He measured his position against graduation day, not against how any given week felt. Isolation and insult became conditions to be outlasted rather than verdicts to be argued with.','He later reflected on walking the path of uprightness even when traps were laid against him — the horizon, not the terrain, set his direction.'],
+    l:[['His later reflections','https://en.wikipedia.org/wiki/Henry_O._Flipper']]}
+};
+
+/* ================= RENDER SECTIONS ================= */
+const recordRows = document.getElementById('recordRows');
+RECORD.forEach(r => {
+  const row = document.createElement('div');
+  row.className = 'ledger-row rule-b py-5 px-3 grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 items-start';
+  row.innerHTML = `
+    <div class="sm:col-span-2 font-mono text-[0.7rem] uppercase tracking-widest text-ibm60 dark:text-ibm40 pt-1">${r.d}</div>
+    <div class="sm:col-span-8">
+      <h3 class="font-display text-xl font-semibold leading-snug">${r.t}</h3>
+      <p class="mt-1.5 text-g80 dark:text-g20">${r.b}</p>
+    </div>
+    <div class="sm:col-span-2 sm:text-right">
+      <button data-modal="${r.m}" class="mt-1 px-3 py-1.5 border border-ibm60 text-ibm60 dark:text-ibm40 dark:border-ibm40 font-mono text-[0.65rem] uppercase tracking-widest hover:bg-ibm60 hover:text-white hover:border-ibm60 transition">More</button>
+    </div>`;
+  recordRows.appendChild(row);
+});
+
+const methodCards = document.getElementById('methodCards');
+METHOD.forEach(m => {
+  const c = document.createElement('div');
+  c.className = 'bg-white dark:bg-g100 p-6 hover:bg-ibm10 dark:hover:bg-ibm90 transition';
+  c.innerHTML = `<h3 class="font-display text-lg font-semibold leading-snug">${m.h}</h3>
+                 <p class="mt-2 text-sm text-g80 dark:text-g20">${m.b}</p>`;
+  methodCards.appendChild(c);
+});
+
+const pillarCards = document.getElementById('pillarCards');
+PILLARS.forEach(p => {
+  const c = document.createElement('div');
+  c.className = 'bg-white dark:bg-g100 border-t-4 border-ibm60 dark:border-ibm40 p-6';
+  c.innerHTML = `
+    <p class="font-mono text-[0.65rem] tracking-[0.3em] text-ibm60 dark:text-ibm40">${p.tag}</p>
+    <h3 class="font-display text-2xl font-semibold mt-2">${p.h}</h3>
+    <p class="mt-3 text-g80 dark:text-g20">${p.b}</p>
+    <p class="mt-4 pt-4 rule-t text-sm"><span class="font-mono text-[0.65rem] uppercase tracking-widest text-g60 dark:text-g30">Do this →</span><br>${p.ask}</p>
+    <button data-modal="${p.m}" class="mt-4 font-mono text-[0.65rem] uppercase tracking-widest underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40">More info & sources</button>`;
+  pillarCards.appendChild(c);
+});
+
+/* ================= MODAL ================= */
+const modal = document.getElementById('modal');
+let lastFocus = null;
+function openModal(key){
+  const d = MODALS[key]; if(!d) return;
+  lastFocus = document.activeElement;
+  document.getElementById('modalTitle').textContent = d.t;
+  document.getElementById('modalBody').innerHTML = d.b.map(p => `<p>${p}</p>`).join('');
+  document.getElementById('modalLinks').innerHTML =
+    '<p class="font-mono text-[0.65rem] uppercase tracking-widest text-g60 dark:text-g30 mb-2">Go deeper</p>' +
+    d.l.map(([label,url]) => `<a class="block underline underline-offset-4 decoration-ibm60 hover:text-ibm60 dark:hover:text-ibm40" href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join('');
+  modal.classList.remove('hidden'); modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modalClose').focus();
+}
+function closeModal(){
+  modal.classList.add('hidden'); modal.classList.remove('flex');
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-modal]');
+  if (b) openModal(b.dataset.modal);
+});
+document.getElementById('modalClose').onclick = closeModal;
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+
+/* ================= DAILY MUSTER ================= */
+const musterList = document.getElementById('musterList');
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+let log = Store.get(K.log, {});
+if (log.date !== todayKey()) log = { date: todayKey(), items:[false,false,false,false] };
+
+PILLARS.forEach((p,i) => {
+  const label = document.createElement('label');
+  label.className = 'flex gap-3 items-start border border-g20 dark:border-g80 p-4 cursor-pointer hover:border-ibm60 dark:hover:border-ibm40 transition';
+  label.innerHTML = `
+    <input type="checkbox" data-idx="${i}" class="mt-1 w-5 h-5 accent-blue-600 shrink-0">
+    <span><span class="font-mono text-[0.65rem] tracking-[0.25em] text-ibm60 dark:text-ibm40">${p.tag}</span>
+    <span class="block font-display text-lg font-semibold mt-0.5">${p.h}</span>
+    <span class="block text-sm text-g80 dark:text-g20 mt-1">${p.ask}</span></span>`;
+  musterList.appendChild(label);
+});
+
+function renderLog(){
+  document.querySelectorAll('#musterList input').forEach((cb,i) => cb.checked = !!log.items[i]);
+  document.getElementById('todayVal').textContent = log.items.filter(Boolean).length;
+  document.getElementById('streakVal').textContent = Store.get(K.streak, 0);
+}
+musterList.addEventListener('change', e => {
+  const i = +e.target.dataset.idx;
+  log.items[i] = e.target.checked;
+  Store.set(K.log, log);
+  if (log.items.every(Boolean) && Store.get(K.lastLogDay) !== todayKey()){
+    Store.set(K.streak, Store.get(K.streak, 0) + 1);
+    Store.set(K.lastLogDay, todayKey());
+  }
+  renderLog();
+});
+document.getElementById('resetLog').onclick = () => {
+  log = { date: todayKey(), items:[false,false,false,false] };
+  Store.set(K.log, log); Store.set(K.streak, 0); Store.set(K.lastLogDay, '');
+  renderLog();
+};
+renderLog();
+
+/* ================= QUIZ ================= */
+const QUIZ = [
+  { q:'Where and into what circumstances was Henry Ossian Flipper born?',
+    o:['Free, in Boston, Massachusetts','Into slavery in Thomasville, Georgia','Free, in West Point, New York','Into slavery in Charleston, South Carolina'], a:1,
+    why:'He was born into slavery in Thomasville, Georgia, on 21 March 1856, and opens his autobiography with his family\'s experience of slavery.' },
+  { q:'Which Georgia congressman nominated him to West Point in 1873?',
+    o:['James C. Freeman','William T. Sherman','James Webster Smith','Oliver O. Howard'], a:0,
+    why:'Congressman James C. Freeman put his name forward; Flipper entered the Academy on 1 July 1873.' },
+  { q:'What was "the silencing" that white cadets imposed on him?',
+    o:['A ban on him speaking in class','A refusal to speak to or socialize with him outside official duty','A rule against him giving orders','A restriction on his mail'], a:1,
+    why:'Silencing was a collective refusal to speak to or associate with him beyond required duty — and it lasted his entire four years.' },
+  { q:'Where did he rank at graduation?',
+    o:['1st in a class of 76','Last in a class of 76','50th in a class of 76','Exactly in the middle, 38th'], a:2,
+    why:'He finished 50th of 76 — above average overall, and strong in engineering, law, French and Spanish.' },
+  { q:'Who handed him his diploma on 14 June 1877?',
+    o:['President Rutherford B. Hayes','General William T. Sherman','General Oliver O. Howard','Congressman James C. Freeman'], a:1,
+    why:'General William T. Sherman presented the diploma. Reports of the day say the crowd applauded him.' },
+  { q:'Which regiment was he commissioned into?',
+    o:['The 1st Infantry','The 7th Cavalry','The 10th U.S. Cavalry','The Corps of Engineers'], a:2,
+    why:'He became a second lieutenant in the 10th U.S. Cavalry, one of the Buffalo Soldier regiments.' },
+  { q:'Who was James Webster Smith?',
+    o:['Flipper\'s commanding officer at Fort Sill','The first Black cadet appointed to West Point, and Flipper\'s first roommate','The professor who tutored Flipper in engineering','The barber who befriended Flipper'], a:1,
+    why:'Smith was appointed in 1870, hazed and physically abused, and eventually dismissed. Flipper roomed with him at first, then lived alone.' },
+  { q:'In which subjects did Flipper particularly excel?',
+    o:['Artillery and horsemanship','Engineering, law, French and Spanish','Chemistry and geology','Drawing and tactics'], a:1,
+    why:'His strengths were engineering, law, French and Spanish — and engineering became his profession for the rest of his life.' },
+  { q:'How did he describe his four years at the Academy?',
+    o:['"A fair fight fairly won"','"Patient endurance and hard and persistent work"','"Four wasted years"','"The happiest years of my life"'], a:1,
+    why:'That phrase is his own. He acknowledged the loneliness and melancholy without letting it derail his performance.' },
+  { q:'What does "focus on controllable excellence" mean in his case?',
+    o:['He concentrated on grades, duty and integrity instead of chasing acceptance that was being withheld','He complained to officers until conditions improved','He lowered his workload to survive the pressure','He avoided difficult courses to protect his ranking'], a:0,
+    why:'Social acceptance was not on offer, so he stopped spending energy on it and invested everything in what answered to his own effort.' },
+  { q:'What was his stance on lowered standards or special treatment?',
+    o:['He requested a reduced course load','He rejected them, insisting on standing on the same ground as every other cadet','He accepted them but kept it private','He argued for them publicly after graduating'], a:1,
+    why:'He wrote that if he could not endure prejudice and persecutions, he did not deserve the cadetship — which kept the achievement entirely his own.' },
+  { q:'What happened to his Army career, and how was it finally resolved?',
+    o:['He retired as a general with full honors','He resigned in 1881 to work as an engineer','An unjust 1881 court-martial ended it; he was cleared and pardoned posthumously decades later','He transferred to the Navy after a dispute'], a:2,
+    why:'The 1881 case ended his career unjustly. His discharge was corrected to honorable in 1976 and he received a presidential pardon in 1999 — long after his death in 1940.' }
+];
+const PASS = 10;
+
+let qi = 0, score = 0, locked = false;
+const el = id => document.getElementById(id);
+
+function updateBoard(){
+  const best = Store.get(K.best, null), last = Store.get(K.last, null);
+  el('bestVal').textContent     = best === null ? '—' : best + '/' + QUIZ.length;
+  el('lastVal').textContent     = last === null ? '—' : last + '/' + QUIZ.length;
+  el('attemptsVal').textContent = Store.get(K.att, 0);
+}
+updateBoard();
+
+function renderQ(){
+  locked = false;
+  const item = QUIZ[qi];
+  el('qNum').textContent = 'Question ' + (qi + 1);
+  el('qText').textContent = item.q;
+  el('progressBar').style.width = (qi / QUIZ.length * 100) + '%';
+  el('progressLabel').textContent = qi + ' / ' + QUIZ.length;
+  el('qFeedback').classList.add('hidden');
+  el('nextBtn').classList.add('hidden');
+  const box = el('qOptions'); box.innerHTML = '';
+  item.o.forEach((text, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt w-full text-left px-4 py-3.5 border border-ibm80 hover:border-ibm40 hover:bg-ibm90 transition';
+    b.innerHTML = `<span class="font-mono text-[0.7rem] text-ibm40 mr-3">${String.fromCharCode(65+i)}</span><span>${text}</span>`;
+    b.onclick = () => answer(i, b);
+    box.appendChild(b);
+  });
+}
+
+function answer(i, btn){
+  if (locked) return;
+  locked = true;
+  const item = QUIZ[qi];
+  const opts = [...document.querySelectorAll('#qOptions .opt')];
+  opts.forEach(o => o.disabled = true);
+  opts[item.a].classList.add('correct');
+  const right = i === item.a;
+  if (!right) btn.classList.add('wrong'); else score++;
+  const fb = el('qFeedback');
+  fb.className = 'mt-5 border-l-2 pl-4 py-1 text-ibm20 ' + (right ? 'border-ok' : 'border-err');
+  fb.innerHTML = `<strong class="font-mono text-[0.7rem] uppercase tracking-widest ${right?'text-ok':'text-err'}">${right?'Correct':'Not quite'}</strong><p class="mt-1.5">${item.why}</p>`;
+  fb.classList.remove('hidden');
+  el('nextBtn').textContent = qi === QUIZ.length - 1 ? 'See your result' : 'Next question';
+  el('nextBtn').classList.remove('hidden');
+}
+
+el('nextBtn').onclick = () => {
+  qi++;
+  if (qi < QUIZ.length) renderQ(); else finish();
+};
+
+function finish(){
+  el('quizCard').classList.add('hidden');
+  el('results').classList.remove('hidden');
+  el('progressBar').style.width = '100%';
+  el('progressLabel').textContent = QUIZ.length + ' / ' + QUIZ.length;
+
+  const passed = score >= PASS;
+  Store.set(K.last, score);
+  Store.set(K.att, Store.get(K.att, 0) + 1);
+  if (score > Store.get(K.best, -1)) Store.set(K.best, score);
+  updateBoard();
+
+  el('resultTitle').textContent = passed
+    ? `${score} of ${QUIZ.length} — passed.`
+    : `${score} of ${QUIZ.length} — not yet.`;
+  el('resultBody').textContent = passed
+    ? 'You know his record and you know the four principles. Your certificate is ready below — and the daily muster is where the mindset actually gets built.'
+    : `You need ${PASS} to pass. Re-read the record and the mindset section, then come back. He needed four years; you can spare ten minutes.`;
+  el('certLink').classList.toggle('hidden', !passed);
+  setupCert(passed, score);
+}
+
+el('retryBtn').onclick = () => {
+  qi = 0; score = 0;
+  el('results').classList.add('hidden');
+  el('quizCard').classList.remove('hidden');
+  renderQ();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth', block:'start'});
+};
+renderQ();
+
+/* ================= CERTIFICATE ================= */
+function setupCert(passed, sc){
+  const gate = el('gateMsg'), form = el('certForm'), cert = el('certificate');
+  if (!passed){
+    const best = Store.get(K.best, 0);
+    gate.textContent = `Not unlocked yet — your best score is ${best} of ${QUIZ.length} and the pass mark is ${PASS}. Take the examination again.`;
+    return;
+  }
+  gate.textContent = 'Passed. Put your name on it and print.';
+  form.classList.remove('hidden'); form.classList.add('flex');
+  cert.classList.remove('hidden');
+
+  const nameInput = el('nameInput');
+  nameInput.value = Store.get(K.name, '') || '';
+  const paint = () => {
+    const n = nameInput.value.trim();
+    el('certName').textContent = n || 'Your name';
+    Store.set(K.name, n);
+  };
+  nameInput.oninput = paint;
+  paint();
+
+  el('certScore').textContent = sc + '/' + QUIZ.length;
+  el('certDate').textContent = new Date().toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'});
+  el('printBtn').onclick = () => {
+    if (!nameInput.value.trim()){ nameInput.focus(); return; }
+    window.print();
+  };
+}
+(function(){
+  const best = Store.get(K.best, null);
+  if (best !== null && best >= PASS) setupCert(true, best);
+})();
+</script>
+</body>
+</html>
